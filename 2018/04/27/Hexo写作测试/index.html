@@ -17,7 +17,7 @@
 
 
 
-  <meta name="description" content="tanjunze"/>
+  <meta name="description" content="Hexo写作测试"/>
 
 
 
@@ -40,7 +40,7 @@
 
 
 
-<link rel="canonical" href="https://tanjunze.github.io/"/>
+<link rel="canonical" href="https://tanjunze.github.io/2018/04/27/Hexo写作测试/"/>
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
@@ -77,7 +77,7 @@
 
 
 
-    <title> Tanjunze笔记 </title>
+    <title> Hexo写作测试 - Tanjunze笔记 </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -152,14 +152,12 @@
         <div class="content-wrapper">
           <div id="content" class="content">
             
-  <section id="posts" class="posts">
-    
-      
+  
   <article class="post">
     <header class="post-header">
       <h1 class="post-title">
         
-          <a class="post-link" href="/2018/04/27/Hexo写作测试/">Hexo写作测试</a>
+          Hexo写作测试
         
       </h1>
 
@@ -177,84 +175,67 @@
 
     <div class="post-content">
       
-        
-        
-
-        
-          <blockquote>
+        <blockquote>
 <p> mnist = input_data.read_data_sets</p>
 </blockquote>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入数据</span></span><br><span class="line">    mnist = input_data.read_data_sets(FLAGS.data_dir)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 创建模型</span></span><br><span class="line">    x = tf.placeholder(tf.float32, [<span class="keyword">None</span>, <span class="number">784</span>])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 定义损失和优化器</span></span><br><span class="line">    y_ = tf.placeholder(tf.int64, [<span class="keyword">None</span>])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 构建深度网路模型</span></span><br><span class="line">    y_conv, keep_prob = deepnn(x)</span><br><span class="line">    <span class="comment"># 损失</span></span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(<span class="string">'loss'</span>):</span><br><span class="line">        cross_entropy = tf.losses.sparse_softmax_cross_entropy(</span><br><span class="line">            labels=y_, logits=y_conv)</span><br><span class="line">    cross_entropy = tf.reduce_mean(cross_entropy)</span><br><span class="line">    <span class="comment"># Adam 优化器</span></span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(<span class="string">'adam_optimizer'</span>):</span><br><span class="line">        train_step = tf.train.AdamOptimizer(<span class="number">1e-4</span>).minimize(cross_entropy)</span><br><span class="line">    <span class="comment"># </span></span><br><span class="line">    <span class="keyword">with</span> tf.name_scope(<span class="string">'accuracy'</span>):</span><br><span class="line">        correct_prediction = tf.equal(tf.argmax(y_conv, <span class="number">1</span>), y_)</span><br><span class="line">        correct_prediction = tf.cast(correct_prediction, tf.float32)</span><br><span class="line">    accuracy = tf.reduce_mean(correct_prediction)</span><br></pre></td></tr></table></figure>
-        
       
     </div>
 
     
-
-    
-
-  </article>
-
-    
       
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          <a class="post-link" href="/2018/04/27/hello-world/">Hello World</a>
-        
-      </h1>
-
-      <div class="post-meta">
-        <span class="post-time">
-          2018-04-27
-        </span>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-    <div class="post-content">
       
-        
-        
 
-        
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-        
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="https://tanjunze.github.io">tanjunze</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="https://tanjunze.github.io/2018/04/27/Hexo写作测试/">https://tanjunze.github.io/2018/04/27/Hexo写作测试/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
       
-    </div>
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
 
+
+
+      
+      
     
 
     
-
-  </article>
-
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
     
-  </section>
-
-  
-  <nav class="pagination">
     
+      <a class="next" href="/2018/04/27/hello-world/">
+        <span class="next-text nav-default">Hello World</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
     
   </nav>
+
+      </footer>
+    
+
+  </article>
 
 
           </div>
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
       </main>
@@ -334,6 +315,11 @@
     </div>
 
     
+  
+  
+
+  
+
 
 
     
