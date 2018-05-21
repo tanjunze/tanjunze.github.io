@@ -219,12 +219,12 @@
 </li>
 <li><p>3.3、(可选)使用 <strong>SQLite</strong>安装和配置Nextcloud</p>
 <blockquote>
-<p>$ sudo date; ansible-playbook -s -c local -i“localhost”，build_nextcloud.yml</p>
+<p>$ sudo date ; ansible-playbook -s -c local -i “localhost,” build_nextcloud.yml</p>
 </blockquote>
 </li>
 <li><p>3.4、(可选)使用 <strong>MySQL</strong>安装和配置Nextcloud</p>
 <blockquote>
-<p>$ date; ansible-playbook -s -c local -i“localhost”，–extra-vars“DATABASE = mysql MYSQL_ROOT_PASSWORD = qwerty NCUSER_PASSWORD = raindrop”build_nextcloud.yml</p>
+<p>$ date ; ansible-playbook -s -c local -i “localhost,” –extra-vars “DATABASE=mysql MYSQL_ROOT_PASSWORD=qwerty NCUSER_PASSWORD=raindrop” build_nextcloud.yml</p>
 </blockquote>
 <p>上面指令中MySQL用户密码（可以自定义）：<br>用户：root     密码：qwerty         对应命令：<strong>MYSQL_ROOT_PASSWORD = qwerty</strong><br>用户：ncuser   密码：rainindrop     对应命令：<strong>NCUSER_PASSWORD = raindrop</strong></p>
 </li>
