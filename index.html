@@ -159,6 +159,85 @@
     <header class="post-header">
       <h1 class="post-title">
         
+          <a class="post-link" href="/2018/05/21/树莓派笔记之自动挂载nfts移动硬盘/">树莓派笔记之自动挂载nfts移动硬盘</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-05-21
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <h2 id="0、插入ntfs的存储设备如：移动硬盘"><a href="#0、插入ntfs的存储设备如：移动硬盘" class="headerlink" title="0、插入ntfs的存储设备如：移动硬盘"></a>0、插入ntfs的存储设备如：移动硬盘</h2><h2 id="1、安装ntfs-3g"><a href="#1、安装ntfs-3g" class="headerlink" title="1、安装ntfs-3g"></a>1、安装<a href="https://en.wikipedia.org/wiki/NTFS-3G" target="_blank" rel="noopener">ntfs-3g</a></h2><blockquote>
+<p>$ apt-get install ntfs-3g</p>
+</blockquote>
+<h2 id="2、查询外接存储目录权限和UUID"><a href="#2、查询外接存储目录权限和UUID" class="headerlink" title="2、查询外接存储目录权限和UUID"></a>2、查询外接存储目录权限和UUID</h2><blockquote>
+<p>$ ls -l /dev/disk/by-uuid/</p>
+</blockquote>
+<p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lrwxrwxrwx 1 root root 10 Jan 1 1970 0AC4D607C4D5F543 - &gt; ../../sda1</span><br></pre></td></tr></table></figure></p>
+<p>记下UUID - &gt; 0AC4D607C4D5F543的值</p>
+<h2 id="3、创建挂载点并赋权"><a href="#3、创建挂载点并赋权" class="headerlink" title="3、创建挂载点并赋权"></a>3、创建挂载点并赋权</h2><blockquote>
+<p>$ sudo mkdir /mnt/usbdrive</p>
+</blockquote>
+<blockquote>
+<p>$ sudo chmod 770 /mnt/usbdrive</p>
+</blockquote>
+<h2 id="4、使用id命令获取uid，pi用户和组的gid（通常为1000）"><a href="#4、使用id命令获取uid，pi用户和组的gid（通常为1000）" class="headerlink" title="4、使用id命令获取uid，pi用户和组的gid（通常为1000）"></a>4、使用id命令获取uid，pi用户和组的gid（通常为1000）</h2><blockquote>
+<p>$ id -u pi</p>
+</blockquote>
+<blockquote>
+<p>$ id -g pi</p>
+</blockquote>
+<h2 id="5、挂载，然后检查-mnt-usbdrive是否可以访问它"><a href="#5、挂载，然后检查-mnt-usbdrive是否可以访问它" class="headerlink" title="5、挂载，然后检查/mnt/usbdrive是否可以访问它"></a>5、挂载，然后检查<strong>/mnt/usbdrive</strong>是否可以访问它</h2><blockquote>
+<p>$ sudo mount -t ntfs-3g -o uid=1000，gid=1000，umask=007 /dev/sda1/mnt/usbdrive</p>
+</blockquote>
+<h2 id="6、备份驱动目录并插入新的挂载点"><a href="#6、备份驱动目录并插入新的挂载点" class="headerlink" title="6、备份驱动目录并插入新的挂载点"></a>6、备份驱动目录并插入新的挂载点</h2><p>备份：</p>
+<blockquote>
+<p>$ sudo cp /etc/fstab /etc/fstab.backup </p>
+</blockquote>
+<p>打开驱动目录文件并在最后一行写入新的驱动信息</p>
+<blockquote>
+<p>$ sudo nano /etc/fstab</p>
+</blockquote>
+<p>在fstab文件中添加安装信息（用您自己的UUID，uid，gid替换）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">UUID=0AC4D607C4D5F543 /mnt/usbdrive ntfs-3g uid=1000，gid=1000，umask=007 0 0</span><br></pre></td></tr></table></figure></p>
+<h2 id="7、重新启动树莓派"><a href="#7、重新启动树莓派" class="headerlink" title="7、重新启动树莓派"></a>7、重新启动树莓派</h2><blockquote>
+<p>sudo reboot</p>
+</blockquote>
+<h2 id="8、作为NextCloud的存储设备"><a href="#8、作为NextCloud的存储设备" class="headerlink" title="8、作为NextCloud的存储设备"></a>8、作为NextCloud的存储设备</h2><p>在/mnt/usbdrive驱动（移动硬盘）上配置NextCloud的数据目录，则它应该对www-data用户拥有770权限。您可以简单地将用户www-data添加到pi组中，因为它已经拥有770的权限，如上面在fstab中设置的那样。</p>
+<blockquote>
+<p>$ sudo usermod -a -G pi www-data</p>
+</blockquote>
+<p>参考网址：<br>  [1]、<a href="http://www.techjawab.com/2013/06/how-to-setup-mount-auto-mount-usb-hard.html" target="_blank" rel="noopener">How to setup mount / auto-mount USB Hard Drive on Raspberry Pi</a><br>  [2]、<a href="http://ja.cques.ca/blog/2013/09/25/ntfs-external-hd-with-owncloud-on-the-raspberry-pi/" target="_blank" rel="noopener">NTFS External HD With ownCloud on the Raspberry Pi</a><br>  [3]、<a href="https://raspberrypi.stackexchange.com/questions/10236/ntfs-3g-hdd-0770-and-0777-permissions-owncloud" target="_blank" rel="noopener">NTFS-3g HDD 0770 and 0777 permissions Owncloud</a><br>  [4]、<a href="https://www.liaronce.win/archives/776" target="_blank" rel="noopener">通过 NextCloudPi 为树莓派可视化搭建 NextCloud 网盘（并折腾无语的 NTFS 移动硬盘）</a><br>  [5]、<a href="http://shumeipai.nxez.com/2013/09/08/raspberry-pi-to-mount-the-removable-hard-disk.html" target="_blank" rel="noopener">给树莓派挂载移动硬盘或U盘</a><br>  [6]、<a href="http://www.freehao123.com/raspberry-pi-nas/" target="_blank" rel="noopener">树莓派Raspberry Pi 打造低成本NAS存储家庭服务器的十个问题整理</a></p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
           <a class="post-link" href="/2018/05/21/树莓派笔记之NextCloud安装/">树莓派笔记之NextCloud安装</a>
         
       </h1>
@@ -347,8 +426,14 @@
 <p>参考博文：<a href="https://blog.csdn.net/shaopengf/article/details/52411926" target="_blank" rel="noopener">Raspberry Pi树莓派无线网卡配置[多重方法备选]</a></p>
 <h2 id="6、安全管理"><a href="#6、安全管理" class="headerlink" title="6、安全管理"></a>6、安全管理</h2><p>  建议修改默认账户密码如：<br>  用户：pi<br>  密码：raspberry</p>
 <h2 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h2><ul>
-<li>1、nano 编辑器 操作<blockquote>
+<li><p>1、nano 编辑器 操作</p>
+<blockquote>
 <p>退出：<strong>control x</strong><br>保存并退出： <strong>control o</strong>  保存 <strong>enter</strong> q确认 <strong>control x</strong> 退出</p>
+</blockquote>
+</li>
+<li><p>2、linxu c重启命令</p>
+<blockquote>
+<p>sudo reboot</p>
 </blockquote>
 </li>
 </ul>
