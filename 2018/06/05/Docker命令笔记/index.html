@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="Docker命令笔记"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Tanjunze笔记">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://tanjunze.github.io/2018/06/05/Docker命令笔记/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> Docker命令笔记 - Tanjunze笔记 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Tanjunze笔记</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Tanjunze笔记</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Docker命令笔记
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-06-05
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Docker-安装"><span class="toc-text">一、Docker 安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、Docker-Compose-安装"><span class="toc-text">二、Docker Compose 安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、Docker-常用命令"><span class="toc-text">三、Docker 常用命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文档"><span class="toc-text">参考文档</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <h2 id="一、Docker-安装"><a href="#一、Docker-安装" class="headerlink" title="一、Docker 安装"></a>一、Docker 安装</h2><p>本示例采用sh脚本安装,其他方式参考<a href="https://docs.docker.com/install/linux/docker-ce/centos/#uninstall-docker-ce" target="_blank" rel="noopener">Docker CE</a>官网。</p>
+<ul>
+<li><p>0、root用户登陆</p>
+</li>
+<li><p>1、升级yum包：</p>
+<blockquote>
+<p>$ sudo yum update</p>
+</blockquote>
+</li>
+<li><p>2、（可选）卸载旧的Docker</p>
+<blockquote>
+<p>$ sudo yum erase docker docker-common docker-client docker-compose</p>
+</blockquote>
+</li>
+<li><p>4、执行 Docker 安装脚本</p>
+<blockquote>
+<p>$ curl -fsSL <a href="https://get.docker.com/" target="_blank" rel="noopener">https://get.docker.com/</a> | sh<br>或<br>$ wget -qO- <a href="https://get.docker.com/" target="_blank" rel="noopener">https://get.docker.com/</a> | sh</p>
+</blockquote>
+</li>
+<li><p>5、测试Docker</p>
+<blockquote>
+<p>$ docker info</p>
+</blockquote>
+</li>
+<li><p>6、设置Docker开机启动</p>
+<blockquote>
+<p>$ sudo systemctl enable docker.service</p>
+</blockquote>
+</li>
+<li><p>7、开启Docker服务</p>
+<blockquote>
+<p>$ sudo systemctl start docker</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="二、Docker-Compose-安装"><a href="#二、Docker-Compose-安装" class="headerlink" title="二、Docker Compose 安装"></a>二、Docker Compose 安装</h2><ul>
+<li><p>1、下载安装脚本</p>
+<blockquote>
+<p>$ curl -L <a href="https://github.com/docker/compose/releases/download/1.21.1/docker-compose-`uname" target="_blank" rel="noopener">https://github.com/docker/compose/releases/download/1.21.1/docker-compose-`uname</a> -s<code>-</code>uname -m` -o /usr/local/bin/docker-compose</p>
+</blockquote>
+</li>
+<li><p>2、添加执行权限</p>
+<blockquote>
+<p>$ chmod +x /usr/local/bin/docker-compose</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="三、Docker-常用命令"><a href="#三、Docker-常用命令" class="headerlink" title="三、Docker 常用命令"></a>三、Docker 常用命令</h2><ul>
+<li><p>Docker 启动</p>
+<blockquote>
+<p>$ sudo systemctl start docker</p>
+</blockquote>
+</li>
+<li><p>docker 开机启动</p>
+<blockquote>
+<p>$ sudo systemctl enable docker.service</p>
+</blockquote>
+</li>
+<li><p>docker 当前容器开机启动</p>
+<blockquote>
+<p>$ docker run -d –restart=always </p>
+</blockquote>
+</li>
+<li><p>容器终端</p>
+<blockquote>
+<p>$ docker exec -it &lt;容器id&gt; /bin/bash</p>
+</blockquote>
+</li>
+<li><p>挂载目录</p>
+<blockquote>
+<p>$ docker run -d -v &lt;主机目录路径&gt;:&lt;容器目录路径 &gt;</p>
+</blockquote>
+</li>
+<li><p>示例：</p>
+<blockquote>
+<p>$ docker run -d –restart=always -v /root/notebooks:/notebooks -it -p 8888:8888 tensorflow/tensorflow:latest-py3</p>
+</blockquote>
+</li>
+<li><p>拉取镜像</p>
+<blockquote>
+<p>$ docker pull &lt;镜像tag&gt;</p>
+</blockquote>
+</li>
+<li><p>查看运行中的容器</p>
+<blockquote>
+<p>$ docker ps</p>
+</blockquote>
+</li>
+<li><p>查看所有容器</p>
+<blockquote>
+<p>$ docker ps -a</p>
+</blockquote>
+</li>
+<li><p>关闭容器</p>
+<blockquote>
+<p>$ docker stop &lt;容器id&gt;</p>
+</blockquote>
+</li>
+<li><p>强制删除容器</p>
+<blockquote>
+<p>$ docker rm -f &lt;容器id&gt;</p>
+</blockquote>
+</li>
+<li><p>查看镜像文件</p>
+<blockquote>
+<p>$ docker images</p>
+</blockquote>
+</li>
+<li><p>删除镜像文件</p>
+<blockquote>
+<p>docker rmi &lt;镜像id&gt;</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul>
+<li>[1]、<a href="https://docs.docker.com/install/linux/docker-ce/centos/#uninstall-docker-ce" target="_blank" rel="noopener">Docker CE</a></li>
+<li>[2]、<a href="https://github.com/docker/compose/releases" target="_blank" rel="noopener">Docker Compose</a></li>
+<li>[3]、<a href="https://www.jianshu.com/p/adaa34795e64" target="_blank" rel="noopener">Docker 常用命令与操作</a></li>
+</ul>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2018/05/24/Frp内网穿透笔记/">
+        <span class="next-text nav-default">Frp内网穿透笔记</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:tan2junze@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/tanjunze" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">tanjunze</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+
+  </body>
+</html>
