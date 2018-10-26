@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>linux笔记之ssh | Tanjunze笔记</title>
+  <title>Category: 树莓派 | Tanjunze笔记</title>
   <meta name="HandheldFriendly" content="True" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="shortcut icon" href="https://raw.githubusercontent.com/tanjunze/tanjunze.github.io/master/images/favicon.ico">
@@ -119,132 +119,168 @@
     <div class="l_body">
     <div class='container clearfix'>
         <div class='l_main'>
-            <article id="post-linux笔记之ssh" class="post white-box article-type-post" itemscope itemprop="blogPost">
-    <section class='meta'>
-        <h1 class="title">
             
-                linux笔记之ssh
-            
-        </h1>
+    <script>
+        window.subData= { title:'category : 树莓派'}
+    </script>
+
+
+<section class="post-list">
+    
+    
+        <div class='post-wrapper'>
+            <article class="post reveal ">
+    <section class="meta">
+        <h2 class="title">
+            <a href="/2018/05/21/树莓派笔记之自动挂载nfts移动硬盘/">
+                
+                    树莓派笔记之自动挂载nfts移动硬盘
+                
+            </a>
+        </h2>
         <time>
-            <i class="fa fa-calendar fa-fw" aria-hidden="true"></i>&nbsp;2018-05-22&nbsp;&nbsp;
-            <i class="fa fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
+            <i class="fa fa-calendar fa-fw" aria-hidden="true"></i>&nbsp;2018-05-21
         </time>
         
     
     <div class='cats'>
-        <a href="/categories/Linux/">Linux</a>
+        <a href="/categories/树莓派/">树莓派</a>
     </div>
 
 
     </section>
 
     <section class="article typo">
+        <h2 id="0、插入ntfs的存储设备如：移动硬盘"><a href="#0、插入ntfs的存储设备如：移动硬盘" class="headerlink" title="0、插入ntfs的存储设备如：移动硬盘"></a>0、插入ntfs的存储设备如：移动硬盘</h2><h2 id="1、安装ntfs-3g"><a href="#1、安装ntfs-3g" class="headerlink" title="1、安装ntfs-3g"></a>1、安装<a href="https://en.wikipedia.org/wiki/NTFS-3G" target="_blank" rel="noopener">ntfs-3g</a></h2><blockquote>
+<p>$ sudo apt-get install ntfs-3g</p>
+</blockquote>
+<h2 id="2、查询外接存储目录权限和UUID"><a href="#2、查询外接存储目录权限和UUID" class="headerlink" title="2、查询外接存储目录权限和UUID"></a>2、查询外接存储目录权限和UUID</h2><blockquote>
+<p>$ ls -l /dev/disk/by-uuid/</p>
+</blockquote>
+<p>输出：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lrwxrwxrwx 1 root root 10 Jan 1 1970 0AC4D607C4D5F543 - &gt; ../../sda1</span><br></pre></td></tr></table></figure></p>
+<p>记下UUID - &gt; 0AC4D607C4D5F543的值<br>
+        
+            <div class="readmore">
+                <a href="/2018/05/21/树莓派笔记之自动挂载nfts移动硬盘/" class="flat-box">READ MORE</a>
+            </div>
+        
 
-        <div class="article-entry" itemprop="articleBody">
-            <h2 id="1、ssh自动脚本登陆"><a href="#1、ssh自动脚本登陆" class="headerlink" title="1、ssh自动脚本登陆"></a>1、ssh自动脚本登陆</h2><ul>
-<li><p>1.1、创建shell脚本，如脚本 login.sh内容如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/usr/bin/expect                   </span></span><br><span class="line"></span><br><span class="line">set timeout 3                     </span><br><span class="line">spawn ssh user@192.168.3.24       </span><br><span class="line">expect "*password*"                 </span><br><span class="line">send "youPassword\r"   </span><br><span class="line">interact</span><br></pre></td></tr></table></figure>
-<a id="more"></a></li>
-<li>1.2、为自动登陆脚本添加执行权限，如：<blockquote>
-<p>$ sudo chmod +x ./login.sh</p>
-</blockquote>
-</li>
-<li><p>1.3、（可选）为脚本添加别名<br>打开用户目录下的.bash_profile文件</p>
-<blockquote>
-<p>$ vim ~/.bash_profile</p>
-</blockquote>
-<p>添加 <strong>别名（如：SSLogin）</strong>和 <strong>脚本路径（如：/Users/youAccount/home/login.sh）</strong>保存并退出， 如：</p>
-<blockquote>
-<p>$ alias SSLogin=’/Users/youAccount/home/login.sh’</p>
-</blockquote>
-<p>刷新环境变量</p>
-<blockquote>
-<p>$ source ~/.bash_profile</p>
-</blockquote>
-<p>在终端中直接使用别名 <strong>SSLogin</strong>去登陆了,如</p>
-<blockquote>
-<p>$ SSLogin</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="2、ssh免密码登陆"><a href="#2、ssh免密码登陆" class="headerlink" title="2、ssh免密码登陆"></a>2、ssh免密码登陆</h2><p>   参考博文：<a href="https://www.jianshu.com/p/03effb53705c" target="_blank" rel="noopener">SSH免密码登陆和免ip连接</a></p>
-<p>参考网址：<br>   [1]、<a href="http://xstarcd.github.io/wiki/shell/expect_handbook.html" target="_blank" rel="noopener">expect教程中文版</a><br>   [2]、<a href="https://www.cnblogs.com/zhenbianshu/p/5867440.html" target="_blank" rel="noopener">shell实现SSH自动登陆</a></p>
+        
+            <div class="full-width auto-padding tags">
+                
+                    <a href="/tags/树莓派/"><i class="fa fa-tag fa-fw"></i>&nbsp;树莓派</a>
+                
+            </div>
+        
+    </section>
+</article>
 
         </div>
+    
+        <div class='post-wrapper'>
+            <article class="post reveal ">
+    <section class="meta">
+        <h2 class="title">
+            <a href="/2018/05/21/树莓派笔记之NextCloud安装/">
+                
+                    树莓派笔记之NextCloud安装
+                
+            </a>
+        </h2>
+        <time>
+            <i class="fa fa-calendar fa-fw" aria-hidden="true"></i>&nbsp;2018-05-21
+        </time>
+        
+    
+    <div class='cats'>
+        <a href="/categories/树莓派/">树莓派</a>
+    </div>
 
-        
-            <div class="article-tags tags">
-                
-                    <a href="/tags/Linux/"><i class="fa fa-tag fa-fw" aria-hidden="true"></i>&nbsp;Linux</a>
-                
-                    <a href="/tags/SSH/"><i class="fa fa-tag fa-fw" aria-hidden="true"></i>&nbsp;SSH</a>
-                
-            </div>
-        
-
-        
-            <div class="prev-next">
-                
-                    <section class="prev" >
-                        <span class="art-item-left">
-                            <h6><i class="fa fa-chevron-left" aria-hidden="true"></i>&nbsp;上一篇</h6>
-                            <h4>
-                                <a href="/2018/05/24/Frp内网穿透笔记/" rel="prev" title="Frp内网穿透笔记">
-                                  
-                                      Frp内网穿透笔记
-                                  
-                                </a>
-                            </h4>
-                            
-                                <h6 class="tags">
-                                    
-                                        <i class="fa fa-tag fa-fw"></i>其他
-                                    
-                                </h6>
-                            
-                        </span>
-                    </section>
-                
-                
-                    <section class="next">
-                        <span class="art-item-right" aria-hidden="true">
-                            <h6>下一篇&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></h6>
-                            <h4>
-                                <a href="/2018/05/22/使用ngrok实现内网穿透/" rel="prev" title="使用ngrok实现内网穿透">
-                                    
-                                        使用ngrok实现内网穿透
-                                    
-                                </a>
-                            </h4>
-                            
-                                <h6 class="tags">
-                                    
-                                        <i class="fa fa-tag fa-fw"></i>代理
-                                    
-                                </h6>
-                            
-                        </span>
-                    </section>
-                
-            </div>
-        
 
     </section>
 
+    <section class="article typo">
+        <blockquote>
+<p><a href="https://github.com/nextcloud/server" target="_blank" rel="noopener">Nextcloud</a> 是一个免费专业的私有云存储网盘「开源」项目，可以让你简单快速地在个人/公司电脑、服务器甚至是树莓派等设备上架设一套属于自己或团队专属的云同步网盘，从而实现跨平台跨设备文件同步、共享、版本控制、团队协作等功能。</p>
+</blockquote>
+<h2 id="1、NextCloud简单安装的三种方式总结"><a href="#1、NextCloud简单安装的三种方式总结" class="headerlink" title="1、NextCloud简单安装的三种方式总结"></a>1、NextCloud简单安装的三种方式总结</h2><ul>
+<li><p>1.1、使用 docker 安装：<br>文档：<a href="https://github.com/nextcloud/docker" target="_blank" rel="noopener">https://github.com/nextcloud/docker</a></p>
+</li>
+<li><p>1.2、使用 nextcloud-snap 安装<br>文档：<a href="https://github.com/nextcloud/nextcloud-snap" target="_blank" rel="noopener">https://github.com/nextcloud/nextcloud-snap</a></p>
+</li>
+<li><p>1.3 使用VM安装<br>文档：<a href="https://github.com/nextcloud/vm" target="_blank" rel="noopener">https://github.com/nextcloud/vm</a></p>
+        
+            <div class="readmore">
+                <a href="/2018/05/21/树莓派笔记之NextCloud安装/" class="flat-box">READ MORE</a>
+            </div>
+        
+
+        
+            <div class="full-width auto-padding tags">
+                
+                    <a href="/tags/树莓派/"><i class="fa fa-tag fa-fw"></i>&nbsp;树莓派</a>
+                
+            </div>
+        
+    </section>
 </article>
 
-<br>
+        </div>
+    
+        <div class='post-wrapper'>
+            <article class="post reveal ">
+    <section class="meta">
+        <h2 class="title">
+            <a href="/2018/05/21/树莓派笔记之安装配置/">
+                
+                    树莓派笔记之安装配置
+                
+            </a>
+        </h2>
+        <time>
+            <i class="fa fa-calendar fa-fw" aria-hidden="true"></i>&nbsp;2018-05-21
+        </time>
+        
+    
+    <div class='cats'>
+        <a href="/categories/树莓派/">树莓派</a>
+    </div>
 
-<!-- 显示推荐文章和评论 -->
 
+    </section>
 
-<script>
-    window.subData = {
-        title: 'linux笔记之ssh',
-        tools: true
-    }
-</script>
+    <section class="article typo">
+        <blockquote>
+<p>前言： 这篇笔记记录不使用<strong>显示屏</strong>和<strong>网线</strong>来安装系统和配置环境</p>
+</blockquote>
+<h2 id="1、准备"><a href="#1、准备" class="headerlink" title="1、准备"></a>1、准备</h2><ul>
+<li><p>树莓派3b+板子</p>
+</li>
+<li><p>SD存储卡和卡套</p>
+</li>
+<li><p>电源线和插头</p>
+</li>
+<li><p>路由器（有wifi就行）</p>
+        
+            <div class="readmore">
+                <a href="/2018/05/21/树莓派笔记之安装配置/" class="flat-box">READ MORE</a>
+            </div>
+        
+
+        
+            <div class="full-width auto-padding tags">
+                
+                    <a href="/tags/树莓派/"><i class="fa fa-tag fa-fw"></i>&nbsp;树莓派</a>
+                
+            </div>
+        
+    </section>
+</article>
+
+        </div>
+    
+</section>
+
 
 
         </div>
@@ -304,13 +340,6 @@
     
     
         
-    <section class='m_widget toc-wrapper'>
-        <div class="header"><i class="fa fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;目录</div>
-        <div class='content'>
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、ssh自动脚本登陆"><span class="toc-text">1、ssh自动脚本登陆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、ssh免密码登陆"><span class="toc-text">2、ssh免密码登陆</span></a></li></ol>
-        </div>
-    </section>
-
 
     
 
@@ -357,10 +386,6 @@
 <script src="/js/search.js"></script>
 <script src="/js/app.js"></script>
 
-
-    
-    
-    
 
 
     <script>setLoadingBarProgress(100);</script>

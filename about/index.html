@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   
-  <title>linux笔记之ssh | Tanjunze笔记</title>
+  <title>关于 | Tanjunze笔记</title>
   <meta name="HandheldFriendly" content="True" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <link rel="shortcut icon" href="https://raw.githubusercontent.com/tanjunze/tanjunze.github.io/master/images/favicon.ico">
@@ -119,115 +119,36 @@
     <div class="l_body">
     <div class='container clearfix'>
         <div class='l_main'>
-            <article id="post-linux笔记之ssh" class="post white-box article-type-post" itemscope itemprop="blogPost">
+            <article id="page-" class="post white-box article-type-page" itemscope itemprop="blogPost">
     <section class='meta'>
         <h1 class="title">
             
-                linux笔记之ssh
+                关于
             
         </h1>
         <time>
-            <i class="fa fa-calendar fa-fw" aria-hidden="true"></i>&nbsp;2018-05-22&nbsp;&nbsp;
+            <i class="fa fa-calendar fa-fw" aria-hidden="true"></i>&nbsp;2018-10-26&nbsp;&nbsp;
             <i class="fa fa-eye fa-fw" aria-hidden="true"></i>&nbsp;<span id="busuanzi_value_page_pv"><i class="fa fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span>
         </time>
         
-    
-    <div class='cats'>
-        <a href="/categories/Linux/">Linux</a>
-    </div>
-
 
     </section>
 
     <section class="article typo">
 
         <div class="article-entry" itemprop="articleBody">
-            <h2 id="1、ssh自动脚本登陆"><a href="#1、ssh自动脚本登陆" class="headerlink" title="1、ssh自动脚本登陆"></a>1、ssh自动脚本登陆</h2><ul>
-<li><p>1.1、创建shell脚本，如脚本 login.sh内容如下：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/usr/bin/expect                   </span></span><br><span class="line"></span><br><span class="line">set timeout 3                     </span><br><span class="line">spawn ssh user@192.168.3.24       </span><br><span class="line">expect "*password*"                 </span><br><span class="line">send "youPassword\r"   </span><br><span class="line">interact</span><br></pre></td></tr></table></figure>
-<a id="more"></a></li>
-<li>1.2、为自动登陆脚本添加执行权限，如：<blockquote>
-<p>$ sudo chmod +x ./login.sh</p>
-</blockquote>
-</li>
-<li><p>1.3、（可选）为脚本添加别名<br>打开用户目录下的.bash_profile文件</p>
+            <p><strong>“不积跬步无以至千里，不积小流无以成江海”</strong></p>
+<h2 id="关于我"><a href="#关于我" class="headerlink" title="关于我"></a>关于我</h2><p>Android技术宅，计算机专业 专科生，喜欢折腾。<br>技术栈:</p>
 <blockquote>
-<p>$ vim ~/.bash_profile</p>
+<p>H5、Java/Android/Kotlin、Cordova、ReactNative、Weex、Flutter(最爱的框架)，Linux、SQl、TensorFlow、C++</p>
 </blockquote>
-<p>添加 <strong>别名（如：SSLogin）</strong>和 <strong>脚本路径（如：/Users/youAccount/home/login.sh）</strong>保存并退出， 如：</p>
-<blockquote>
-<p>$ alias SSLogin=’/Users/youAccount/home/login.sh’</p>
-</blockquote>
-<p>刷新环境变量</p>
-<blockquote>
-<p>$ source ~/.bash_profile</p>
-</blockquote>
-<p>在终端中直接使用别名 <strong>SSLogin</strong>去登陆了,如</p>
-<blockquote>
-<p>$ SSLogin</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="2、ssh免密码登陆"><a href="#2、ssh免密码登陆" class="headerlink" title="2、ssh免密码登陆"></a>2、ssh免密码登陆</h2><p>   参考博文：<a href="https://www.jianshu.com/p/03effb53705c" target="_blank" rel="noopener">SSH免密码登陆和免ip连接</a></p>
-<p>参考网址：<br>   [1]、<a href="http://xstarcd.github.io/wiki/shell/expect_handbook.html" target="_blank" rel="noopener">expect教程中文版</a><br>   [2]、<a href="https://www.cnblogs.com/zhenbianshu/p/5867440.html" target="_blank" rel="noopener">shell实现SSH自动登陆</a></p>
+<h2 id="联系方式"><a href="#联系方式" class="headerlink" title="联系方式"></a>联系方式</h2><p>邮箱：<a href="mailto:tan_junze@qq.com" target="_blank" rel="noopener">tan_junze@qq.com</a></p>
+<p>Github：<a href="https://github.com/tanjunze" target="_blank" rel="noopener">https://github.com/tanjunze</a></p>
 
         </div>
 
         
-            <div class="article-tags tags">
-                
-                    <a href="/tags/Linux/"><i class="fa fa-tag fa-fw" aria-hidden="true"></i>&nbsp;Linux</a>
-                
-                    <a href="/tags/SSH/"><i class="fa fa-tag fa-fw" aria-hidden="true"></i>&nbsp;SSH</a>
-                
-            </div>
-        
 
-        
-            <div class="prev-next">
-                
-                    <section class="prev" >
-                        <span class="art-item-left">
-                            <h6><i class="fa fa-chevron-left" aria-hidden="true"></i>&nbsp;上一篇</h6>
-                            <h4>
-                                <a href="/2018/05/24/Frp内网穿透笔记/" rel="prev" title="Frp内网穿透笔记">
-                                  
-                                      Frp内网穿透笔记
-                                  
-                                </a>
-                            </h4>
-                            
-                                <h6 class="tags">
-                                    
-                                        <i class="fa fa-tag fa-fw"></i>其他
-                                    
-                                </h6>
-                            
-                        </span>
-                    </section>
-                
-                
-                    <section class="next">
-                        <span class="art-item-right" aria-hidden="true">
-                            <h6>下一篇&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></h6>
-                            <h4>
-                                <a href="/2018/05/22/使用ngrok实现内网穿透/" rel="prev" title="使用ngrok实现内网穿透">
-                                    
-                                        使用ngrok实现内网穿透
-                                    
-                                </a>
-                            </h4>
-                            
-                                <h6 class="tags">
-                                    
-                                        <i class="fa fa-tag fa-fw"></i>代理
-                                    
-                                </h6>
-                            
-                        </span>
-                    </section>
-                
-            </div>
         
 
     </section>
@@ -241,11 +162,10 @@
 
 <script>
     window.subData = {
-        title: 'linux笔记之ssh',
+        title: '关于',
         tools: true
     }
 </script>
-
 
         </div>
         <aside class='l_side'>
@@ -307,7 +227,7 @@
     <section class='m_widget toc-wrapper'>
         <div class="header"><i class="fa fa-list fa-fw" aria-hidden="true"></i>&nbsp;&nbsp;目录</div>
         <div class='content'>
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、ssh自动脚本登陆"><span class="toc-text">1、ssh自动脚本登陆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、ssh免密码登陆"><span class="toc-text">2、ssh免密码登陆</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#关于我"><span class="toc-text">关于我</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#联系方式"><span class="toc-text">联系方式</span></a></li></ol>
         </div>
     </section>
 
