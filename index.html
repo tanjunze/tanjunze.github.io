@@ -7,12 +7,12 @@
   <title>Tanjunze笔记</title>
   <meta name="HandheldFriendly" content="True" />
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <link rel="shortcut icon" href="/">
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/tanjunze/tanjunze.github.io/master/images/favicon.ico">
   <link rel="alternate" href="/atom.xml" title="Tanjunze笔记">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <link rel="shortcut icon" href="" />
-  <link rel="icon" href="" />
+  <link rel="shortcut icon" href="https://raw.githubusercontent.com/tanjunze/tanjunze.github.io/master/images/favicon.ico" />
+  <link rel="icon" href="https://raw.githubusercontent.com/tanjunze/tanjunze.github.io/master/images/favicon.ico" />
   <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
   <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link href='//cdn.bootcss.com/node-waves/0.7.5/waves.min.css' rel='stylesheet'>
@@ -640,13 +640,11 @@
         <script>setLoadingBarProgress(60);</script>
     </div>
     </div>
-    <script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-<footer id="footer" class="clearfix">
+    <footer id="footer" class="clearfix">
     
     <br>
     <div>本站使用 <a href="https://xaoxuu.com/wiki/material-x/" target="_blank" class="codename">Material X</a> 作为主题，
-		总访问量为 <span id="busuanzi_value_site_pv"><i class="fa fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span> 次。
+        本站访客数 <span id="busuanzi_value_site_uv"><i class="fa fa-spinner fa-spin fa-fw" aria-hidden="true"></i></span> 次。
     </div>
 </footer>
 <!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
@@ -683,4 +681,87 @@
 
 
     <script>setLoadingBarProgress(100);</script>
+    <script type="text/javascript">
+        ! function () {
+            function o(w, v, i) {
+                return w.getAttribute(v) || i
+            }
+
+            function j(i) {
+                return document.getElementsByTagName(i)
+            }
+
+            function l() {
+                var i = j("script"),
+                    w = i.length,
+                    v = i[w - 1];
+                return {
+                    l: w,
+                    z: o(v, "zIndex", -1), //设置动态图显示的层位，一般-1就行，不用改
+                    o: o(v, "opacity", 0.5), //0.5显示的是线条的透明度，可以自行调整
+                    c: o(v, "color", "0,0,0"), //设置线条的颜色，三个0,0,0分别代表RGB颜色数值，不知道的可以打开PS里的拾色器就可以看到RGB数值了
+                    n: o(v, "count", 120), //设置线条显示的数量，有密集恐惧症的朋友可别把数值设置太大哦
+                }
+            }
+
+            function k() {
+                r = u.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth, n = u.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+            }
+
+            function b() {
+                e.clearRect(0, 0, r, n);
+                var w = [f].concat(t);
+                var x, v, A, B, z, y;
+                t.forEach(function (i) {
+                    i.x += i.xa, i.y += i.ya, i.xa *= i.x > r || i.x < 0 ? -1 : 1, i.ya *= i.y > n || i.y < 0 ? -1 : 1, e.fillRect(i.x - 0.5, i.y - 0.5, 1, 1);
+                    for (v = 0; v < w.length; v++) {
+                        x = w[v];
+                        if (i !== x && null !== x.x && null !== x.y) {
+                            B = i.x - x.x, z = i.y - x.y, y = B * B + z * z;
+                            y < x.max && (x === f && y >= x.max / 2 && (i.x -= 0.03 * B, i.y -= 0.03 * z), A = (x.max - y) / x.max, e.beginPath(), e.lineWidth = A / 2, e.strokeStyle = "rgba(" + s.c + "," + (A + 0.2) + ")", e.moveTo(i.x, i.y), e.lineTo(x.x, x.y), e.stroke())
+                        }
+                    }
+                    w.splice(w.indexOf(i), 1)
+                }), m(b)
+            }
+            var u = document.createElement("canvas"),
+                s = l(),
+                c = "c_n" + s.l,
+                e = u.getContext("2d"),
+                r, n, m = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (i) {
+                    window.setTimeout(i, 1000 / 45)
+                },
+                a = Math.random,
+                f = {
+                    x: null,
+                    y: null,
+                    max: 20000
+                };
+            u.id = c;
+            u.style.cssText = "position:fixed;top:0;left:0;z-index:" + s.z + ";opacity:" + s.o;
+            j("body")[0].appendChild(u);
+            k(), window.onresize = k;
+            window.onmousemove = function (i) {
+                i = i || window.event, f.x = i.clientX, f.y = i.clientY
+            }, window.onmouseout = function () {
+                f.x = null, f.y = null
+            };
+            for (var t = [], p = 0; s.n > p; p++) {
+                var h = a() * r,
+                    g = a() * n,
+                    q = 2 * a() - 1,
+                    d = 2 * a() - 1;
+                t.push({
+                    x: h,
+                    y: g,
+                    xa: q,
+                    ya: d,
+                    max: 6000
+                })
+            }
+            setTimeout(function () {
+                b()
+            }, 100)
+        }();
+    </script>
 </body>
