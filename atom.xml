@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://tanjunze.github.io/"/>
-  <updated>2018-10-26T01:19:55.554Z</updated>
+  <updated>2018-10-26T02:20:58.307Z</updated>
   <id>https://tanjunze.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://tanjunze.github.io/2018/06/05/Docker%E5%91%BD%E4%BB%A4%E7%AC%94%E8%AE%B0/"/>
     <id>https://tanjunze.github.io/2018/06/05/Docker命令笔记/</id>
     <published>2018-06-05T10:15:12.000Z</published>
-    <updated>2018-10-26T01:19:55.554Z</updated>
+    <updated>2018-10-26T02:20:58.307Z</updated>
     
     <content type="html"><![CDATA[<h2 id="一、Docker-安装"><a href="#一、Docker-安装" class="headerlink" title="一、Docker 安装"></a>一、Docker 安装</h2><p>本示例采用sh脚本安装,其他方式参考<a href="https://docs.docker.com/install/linux/docker-ce/centos/#uninstall-docker-ce" target="_blank" rel="noopener">Docker CE</a>官网。<br><a id="more"></a></p><ul><li><p>0、root用户登陆</p></li><li><p>1、升级yum包：</p><blockquote><p>$ sudo yum update</p></blockquote></li><li><p>2、（可选）卸载旧的Docker</p><blockquote><p>$ sudo yum erase docker docker-common docker-client docker-compose</p></blockquote></li><li><p>4、执行 Docker 安装脚本</p><blockquote><p>$ curl -fsSL <a href="https://get.docker.com/" target="_blank" rel="noopener">https://get.docker.com/</a> | sh<br>或<br>$ wget -qO- <a href="https://get.docker.com/" target="_blank" rel="noopener">https://get.docker.com/</a> | sh</p></blockquote></li><li><p>5、测试Docker</p><blockquote><p>$ docker info</p></blockquote></li><li><p>6、设置Docker开机启动</p><blockquote><p>$ sudo systemctl enable docker.service</p></blockquote></li><li><p>7、开启Docker服务</p><blockquote><p>$ sudo systemctl start docker</p></blockquote></li></ul><h2 id="二、Docker-Compose-安装"><a href="#二、Docker-Compose-安装" class="headerlink" title="二、Docker Compose 安装"></a>二、Docker Compose 安装</h2><ul><li><p>1、下载安装脚本</p><blockquote><p>$ curl -L <a href="https://github.com/docker/compose/releases/download/1.21.1/docker-compose-`uname" target="_blank" rel="noopener">https://github.com/docker/compose/releases/download/1.21.1/docker-compose-`uname</a> -s<code>-</code>uname -m` -o /usr/local/bin/docker-compose</p></blockquote></li><li><p>2、添加执行权限</p><blockquote><p>$ chmod +x /usr/local/bin/docker-compose</p></blockquote></li></ul><h2 id="三、Docker-常用命令"><a href="#三、Docker-常用命令" class="headerlink" title="三、Docker 常用命令"></a>三、Docker 常用命令</h2><ul><li><p>Docker 启动</p><blockquote><p>$ sudo systemctl start docker</p></blockquote></li><li><p>docker 开机启动</p><blockquote><p>$ sudo systemctl enable docker.service</p></blockquote></li><li><p>docker 当前容器开机启动</p><blockquote><p>$ docker run -d –restart=always </p></blockquote></li><li><p>容器终端</p><blockquote><p>$ docker exec -it &lt;容器id&gt; /bin/bash</p></blockquote></li><li><p>挂载目录</p><blockquote><p>$ docker run -d -v &lt;主机目录路径&gt;:&lt;容器目录路径 &gt;</p></blockquote></li><li><p>示例：</p><blockquote><p>$ docker run -d –restart=always -v /root/notebooks:/notebooks -it -p 8888:8888 tensorflow/tensorflow:latest-py3</p></blockquote></li><li><p>拉取镜像</p><blockquote><p>$ docker pull &lt;镜像tag&gt;</p></blockquote></li><li><p>查看运行中的容器</p><blockquote><p>$ docker ps</p></blockquote></li><li><p>查看所有容器</p><blockquote><p>$ docker ps -a</p></blockquote></li><li><p>关闭容器</p><blockquote><p>$ docker stop &lt;容器id&gt;</p></blockquote></li><li><p>强制删除容器</p><blockquote><p>$ docker rm -f &lt;容器id&gt;</p></blockquote></li><li><p>查看镜像文件</p><blockquote><p>$ docker images</p></blockquote></li><li><p>删除镜像文件</p><blockquote><p>docker rmi &lt;镜像id&gt;</p></blockquote></li></ul><h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ul><li>[1]、<a href="https://docs.docker.com/install/linux/docker-ce/centos/#uninstall-docker-ce" target="_blank" rel="noopener">Docker CE</a></li><li>[2]、<a href="https://github.com/docker/compose/releases" target="_blank" rel="noopener">Docker Compose</a></li><li>[3]、<a href="https://www.jianshu.com/p/adaa34795e64" target="_blank" rel="noopener">Docker 常用命令与操作</a></li></ul>]]></content>
     
@@ -30,6 +30,8 @@
       &lt;h2 id=&quot;一、Docker-安装&quot;&gt;&lt;a href=&quot;#一、Docker-安装&quot; class=&quot;headerlink&quot; title=&quot;一、Docker 安装&quot;&gt;&lt;/a&gt;一、Docker 安装&lt;/h2&gt;&lt;p&gt;本示例采用sh脚本安装,其他方式参考&lt;a href=&quot;https://docs.docker.com/install/linux/docker-ce/centos/#uninstall-docker-ce&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Docker CE&lt;/a&gt;官网。&lt;br&gt;
     
     </summary>
+    
+      <category term="Docker" scheme="https://tanjunze.github.io/categories/Docker/"/>
     
     
       <category term="Docker" scheme="https://tanjunze.github.io/tags/Docker/"/>
@@ -41,7 +43,7 @@
     <link href="https://tanjunze.github.io/2018/05/24/Frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E7%AC%94%E8%AE%B0/"/>
     <id>https://tanjunze.github.io/2018/05/24/Frp内网穿透笔记/</id>
     <published>2018-05-24T15:54:04.000Z</published>
-    <updated>2018-10-26T01:20:05.886Z</updated>
+    <updated>2018-10-26T02:21:33.265Z</updated>
     
     <content type="html"><![CDATA[<p><a href="https://github.com/fatedier/frp/issues/176" target="_blank" rel="noopener">https://github.com/fatedier/frp/issues/176</a><br><a id="more"></a></p>]]></content>
     
@@ -50,6 +52,8 @@
       &lt;p&gt;&lt;a href=&quot;https://github.com/fatedier/frp/issues/176&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;https://github.com/fatedier/frp/issues/176&lt;/a&gt;&lt;br&gt;
     
     </summary>
+    
+      <category term="杂记" scheme="https://tanjunze.github.io/categories/%E6%9D%82%E8%AE%B0/"/>
     
     
       <category term="其他" scheme="https://tanjunze.github.io/tags/%E5%85%B6%E4%BB%96/"/>
