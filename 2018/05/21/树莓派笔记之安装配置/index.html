@@ -31,22 +31,29 @@
 
 
 
-  <link rel="alternate" href="/default" title="Tanjunze笔记">
+  <link rel="alternate" href="/atom.xml" title="Tanjunze笔记">
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.1" />
 
 
 
 <link rel="canonical" href="https://tanjunze.github.io/2018/05/21/树莓派笔记之安装配置/"/>
 
 
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
 
 
 
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css" />
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.1" />
 
 
 
@@ -77,6 +84,10 @@
 
 
 
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null},"toc":true,"fancybox":true,"pjax":true};
+</script>
+
     <title> 树莓派笔记之安装配置 - Tanjunze笔记 </title>
   </head>
 
@@ -103,15 +114,6 @@
         </li>
       </a>
     
-      <a href="/archives/">
-        <li class="mobile-menu-item">
-          
-          
-            归档
-          
-        </li>
-      </a>
-    
   </ul>
 </nav>
 
@@ -129,15 +131,6 @@
             
             
               首页
-            
-          </a>
-        </li>
-      
-        <li class="menu-item">
-          <a class="menu-item-link" href="/archives/">
-            
-            
-              归档
             
           </a>
         </li>
@@ -178,6 +171,7 @@
       <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、准备"><span class="toc-text">1、准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、刻录系统"><span class="toc-text">2、刻录系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、配置wifi和ssh"><span class="toc-text">3、配置wifi和ssh</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、安装系统并ssh登陆"><span class="toc-text">4、安装系统并ssh登陆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5、设置wifi在板子断电或重启后自动连接网络"><span class="toc-text">5、设置wifi在板子断电或重启后自动连接网络</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6、安全管理"><span class="toc-text">6、安全管理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#注："><span class="toc-text">注：</span></a></li></ol>
     </div>
   </div>
+
 
 
     <div class="post-content">
@@ -273,6 +267,22 @@
       
       
 
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="https://tanjunze.github.io">tanjunze</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="https://tanjunze.github.io/2018/05/21/树莓派笔记之安装配置/">https://tanjunze.github.io/2018/05/21/树莓派笔记之安装配置/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
 
 
       
@@ -301,6 +311,7 @@
     
   </nav>
 
+
       </footer>
     
 
@@ -323,7 +334,7 @@
     
       
         
-          <a href="mailto:tan2junze@gmail.com" class="iconfont icon-email" title="email"></a>
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
         
       
     
@@ -339,7 +350,7 @@
     
       
         
-          <a href="https://github.com/tanjunze" class="iconfont icon-github" title="github"></a>
+          <a href="https://github.com/ahonn" class="iconfont icon-github" title="github"></a>
         
       
     
@@ -355,12 +366,12 @@
     
       
     
+
     
-    
-      
       <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
     
   </div>
+
 
 
 <div class="copyright">
@@ -404,12 +415,19 @@
 
 
     
+  
+
+
+
+  
+  
+
 
 
 
 
   
-    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
   
 
   
@@ -417,10 +435,19 @@
   
 
   
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
 
 
-    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
-<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.1"></script>
 
   </body>
 </html>
