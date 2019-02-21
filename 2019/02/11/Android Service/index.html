@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="tanjunze"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tanjunze笔记">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.1" />
+
+
+
+<link rel="canonical" href="https://tanjunze.github.io/2019/02/11/Android Service/"/>
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css" />
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.1" />
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null},"toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title>  - Tanjunze笔记 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Tanjunze笔记</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Tanjunze笔记</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-02-11
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Android-Service"><span class="toc-text">Android Service</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一、Service"><span class="toc-text">一、Service</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#二、Server的生命周期"><span class="toc-text">二、Server的生命周期</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <h1 id="Android-Service"><a href="#Android-Service" class="headerlink" title="Android Service"></a>Android Service</h1><h4 id="一、Service"><a href="#一、Service" class="headerlink" title="一、Service"></a>一、Service</h4><p><code>Service</code> 是一个可以在后台执行长时间运行操作而不提供用户界面的应用组件。</p>
+<p><code>Service</code>有2种启动方式：</p>
+<p><strong><code>startService</code></strong></p>
+<p>当应用组件（如 Activity）通过调用 <code>startService()</code> 启动服务时，服务即处于“启动”状态。一旦启动，服务即可在后台无限期运行，即使启动服务的组件已被销毁也不受影响。 已启动的服务通常是执行单一操作，而且不会将结果返回给调用方。例如，它可能通过网络下载或上传文件。 操作完成后，服务会自行停止运行。</p>
+<p><strong><code>bindSevice</code></strong></p>
+<p>当应用组件通过调用 <code>bindService()</code> 绑定到服务时，服务即处于“绑定”状态。绑定服务提供了一个客户端-服务器接口，允许组件与服务进行交互、发送请求、获取结果，甚至是利用进程间通信 (IPC) 跨进程执行这些操作。 仅当与另一个应用组件绑定时，绑定服务才会运行。 多个组件可以同时绑定到该服务，但全部取消绑定后，该服务即会被销毁。</p>
+<p><code>onStartCommand()</code> 方法必须返回整型数。整型数是一个值，用于描述系统应该如何在服务终止的情况下继续运行服务（如上所述，<code>IntentService</code> 的默认实现将为您处理这种情况，不过您可以对其进行修改）。从 <code>onStartCommand()</code> 返回的值必须是以下常量之一：</p>
+<ul>
+<li><p><code>START_NOT_STICKY</code></p>
+<p>如果系统在 <code>onStartCommand()</code> 返回后终止服务，则除非有挂起 Intent 要传递，否则系统<em>不会</em>重建服务。这是最安全的选项，可以避免在不必要时以及应用能够轻松重启所有未完成的作业时运行服务。</p>
+</li>
+<li><p><code>START_STICKY</code></p>
+<p>如果系统在 <code>onStartCommand()</code> 返回后终止服务，则会重建服务并调用 <code>onStartCommand()</code>，但<em>不会</em>重新传递最后一个 Intent。相反，除非有挂起 Intent 要启动服务（在这种情况下，将传递这些 Intent ），否则系统会通过空 Intent 调用 <code>onStartCommand()</code>。这适用于不执行命令、但无限期运行并等待作业的媒体播放器（或类似服务）。</p>
+</li>
+<li><p><code>START_REDELIVER_INTENT</code></p>
+<p>如果系统在 <code>onStartCommand()</code> 返回后终止服务，则会重建服务，并通过传递给服务的最后一个 Intent 调用 <code>onStartCommand()</code>。任何挂起 Intent 均依次传递。这适用于主动执行应该立即恢复的作业（例如下载文件）的服务。</p>
+</li>
+</ul>
+<h4 id="二、Server的生命周期"><a href="#二、Server的生命周期" class="headerlink" title="二、Server的生命周期"></a>二、Server的生命周期</h4><p><img src="/Users/tanjz/SoftDevelop/Hexo/source/_posts/images/service_lifecycle.png" alt=""></p>
+<p><img src="/Users/tanjz/SoftDevelop/Hexo/source/_posts/images/service_binding_tree_lifecycle.png" alt=""></p>
+<p><strong>注</strong>：官网更详细（<a href="https://developer.android.com/reference/android/app/IntentService.html" target="_blank" rel="noopener">IntentServie</a>,<a href="https://developer.android.com/training/run-background-service/report-status" target="_blank" rel="noopener">JobIntentService</a>,<a href="https://developer.android.com/guide/components/bound-services" target="_blank" rel="noopener">binderService</a>,），这里只做抛砖引玉的作用。</p>
+<p>参考：</p>
+<p>[1]、<a href="https://developer.android.com/guide/components/services?hl=zh-cn" target="_blank" rel="noopener">android services</a></p>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="https://tanjunze.github.io">tanjunze</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="https://tanjunze.github.io/2019/02/11/Android Service/">https://tanjunze.github.io/2019/02/11/Android Service/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/02/11/Android Broadcasts/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default"></span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/02/11/Android Activity/">
+        <span class="next-text nav-default"></span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/ahonn" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">tanjunze</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.1"></script>
+
+  </body>
+</html>
