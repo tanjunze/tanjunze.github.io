@@ -38,7 +38,7 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.1" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2" />
 
 
 
@@ -55,7 +55,7 @@
 
 
 
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.1" />
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2" />
 
 
 
@@ -116,6 +116,33 @@
         </li>
       </a>
     
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
   </ul>
 </nav>
 
@@ -133,6 +160,33 @@
             
             
               首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
             
           </a>
         </li>
@@ -219,29 +273,13 @@
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> enableFlags(&#123;<span class="built_in">bool</span> bold, <span class="built_in">bool</span> hidden&#125;) &#123;...&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="Optional-positional-parameters（可选位置参数）"><a href="#Optional-positional-parameters（可选位置参数）" class="headerlink" title="Optional positional parameters（可选位置参数）"></a>Optional positional parameters（可选位置参数）</h4><p>把一些方法的参数放到 <code>[]</code> 中就变成可选 位置参数了：</p>
 <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span> say(<span class="built_in">String</span> from, <span class="built_in">String</span> msg, [<span class="built_in">String</span> device]) &#123;</span><br><span class="line">  <span class="keyword">var</span> result = <span class="string">'$from says $msg'</span>;</span><br><span class="line">  <span class="keyword">if</span> (device != <span class="keyword">null</span>) &#123;</span><br><span class="line">    result = <span class="string">'$result with a $device'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span>(say(<span class="string">'Bob'</span>, <span class="string">'Howdy'</span>) == <span class="string">'Bob says Howdy'</span>); <span class="comment">//true</span></span><br><span class="line"><span class="keyword">assert</span>(say(<span class="string">'Bob'</span>, <span class="string">'Howdy'</span>, <span class="string">'smoke signal'</span>) ==</span><br><span class="line">    <span class="string">'Bob says Howdy with a smoke signal'</span>);<span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<h4 id="Default-parameter-values（默认参数值）"><a href="#Default-parameter-values（默认参数值）" class="headerlink" title="Default parameter values（默认参数值）"></a>Default parameter values（默认参数值）</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// Sets the [bold] and [hidden] flags ...</span></span><br><span class="line"><span class="keyword">void</span> enableFlags(&#123;<span class="built_in">bool</span> bold = <span class="keyword">false</span>, <span class="built_in">bool</span> hidden = <span class="keyword">false</span>&#125;) &#123;...&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// bold will be true; hidden will be false.</span></span><br><span class="line">enableFlags(bold: <span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">String</span> say(<span class="built_in">String</span> from, <span class="built_in">String</span> msg,</span><br><span class="line">    [<span class="built_in">String</span> device = <span class="string">'carrier pigeon'</span>, <span class="built_in">String</span> mood]) &#123;</span><br><span class="line">  <span class="keyword">var</span> result = <span class="string">'$from says $msg'</span>;</span><br><span class="line">  <span class="keyword">if</span> (device != <span class="keyword">null</span>) &#123;</span><br><span class="line">    result = <span class="string">'$result with a $device'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (mood != <span class="keyword">null</span>) &#123;</span><br><span class="line">    result = <span class="string">'$result (in a $mood mood)'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span>(say(<span class="string">'Bob'</span>, <span class="string">'Howdy'</span>) ==</span><br><span class="line">    <span class="string">'Bob says Howdy with a carrier pigeon'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> doStuff(</span><br><span class="line">    &#123;<span class="built_in">List</span>&lt;<span class="built_in">int</span>&gt; list = <span class="keyword">const</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">    <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; gifts = <span class="keyword">const</span> &#123;</span><br><span class="line">      <span class="string">'first'</span>: <span class="string">'paper'</span>,</span><br><span class="line">      <span class="string">'second'</span>: <span class="string">'cotton'</span>,</span><br><span class="line">      <span class="string">'third'</span>: <span class="string">'leather'</span></span><br><span class="line">    &#125;&#125;) &#123;</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">'list:  $list'</span>);</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">'gifts: $gifts'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Default-parameter-values（默认参数值）"><a href="#Default-parameter-values（默认参数值）" class="headerlink" title="Default parameter values（默认参数值）"></a>Default parameter values（默认参数值）</h4><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="markdown">/// Sets </span>the<span class="markdown"> [bold] and [hidden] flags ...</span></span></span><br><span class="line"><span class="keyword">void</span> enableFlags(&#123;<span class="built_in">bool</span> bold = <span class="keyword">false</span>, <span class="built_in">bool</span> hidden = <span class="keyword">false</span>&#125;) &#123;...&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// bold will be true; hidden will be false.</span></span><br><span class="line">enableFlags(bold: <span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">String</span> say(<span class="built_in">String</span> from, <span class="built_in">String</span> msg,</span><br><span class="line">    [<span class="built_in">String</span> device = <span class="string">'carrier pigeon'</span>, <span class="built_in">String</span> mood]) &#123;</span><br><span class="line">  <span class="keyword">var</span> result = <span class="string">'$from says $msg'</span>;</span><br><span class="line">  <span class="keyword">if</span> (device != <span class="keyword">null</span>) &#123;</span><br><span class="line">    result = <span class="string">'$result with a $device'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (mood != <span class="keyword">null</span>) &#123;</span><br><span class="line">    result = <span class="string">'$result (in a $mood mood)'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">assert</span>(say(<span class="string">'Bob'</span>, <span class="string">'Howdy'</span>) ==</span><br><span class="line">    <span class="string">'Bob says Howdy with a carrier pigeon'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> doStuff(</span><br><span class="line">    &#123;<span class="built_in">List</span>&lt;<span class="built_in">int</span>&gt; list = <span class="keyword">const</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">    <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">String</span>&gt; gifts = <span class="keyword">const</span> &#123;</span><br><span class="line">      <span class="string">'first'</span>: <span class="string">'paper'</span>,</span><br><span class="line">      <span class="string">'second'</span>: <span class="string">'cotton'</span>,</span><br><span class="line">      <span class="string">'third'</span>: <span class="string">'leather'</span></span><br><span class="line">    &#125;&#125;) &#123;</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">'list:  $list'</span>);</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">'gifts: $gifts'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
     
       
       
-
-  <div class="post-copyright">
-    <p class="copyright-item">
-      <span>原文作者: </span>
-      <a href="https://tanjunze.github.io">tanjunze</a>
-    </p>
-    <p class="copyright-item">
-      <span>原文链接: </span>
-      <a href="https://tanjunze.github.io/2018/03/22/Dart之旅/">https://tanjunze.github.io/2018/03/22/Dart之旅/</a>
-    </p>
-    <p class="copyright-item">
-      <span>许可协议: </span>
-      
-      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
-    </p>
-  </div>
 
 
 
@@ -300,7 +338,7 @@
     
       
         
-          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+          <a href="mailto:tan2junze@gmail.com" class="iconfont icon-email" title="email"></a>
         
       
     
@@ -316,7 +354,7 @@
     
       
         
-          <a href="https://github.com/ahonn" class="iconfont icon-github" title="github"></a>
+          <a href="https://github.com/tanjunze" class="iconfont icon-github" title="github"></a>
         
       
     
@@ -354,7 +392,7 @@
     
     &copy; 
      
-      2015 - 
+      2017 - 
     
     2019
 
@@ -413,7 +451,7 @@
   
 
 
-    <script type="text/javascript" src="/js/src/even.js?v=2.10.1"></script>
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
 
   </body>
 </html>

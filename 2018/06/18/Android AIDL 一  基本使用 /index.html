@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="Android AIDL 使用"/>
+
+
+
+
+  <meta name="keywords" content="Android, Tanjunze笔记" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tanjunze笔记">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2" />
+
+
+
+<link rel="canonical" href="https://tanjunze.github.io/2018/06/18/Android AIDL 一  基本使用 /"/>
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css" />
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2" />
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null},"toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title> Android AIDL 使用 - Tanjunze笔记 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Tanjunze笔记</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Tanjunze笔记</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Android AIDL 使用
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-06-17
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/Android/">Android</a>
+            
+          </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Android-AIDL"><span class="toc-text">Android AIDL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、定义AIDL接口"><span class="toc-text">一、定义AIDL接口</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、创建-aidl-文件"><span class="toc-text">1、创建 .aidl 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、实现-aidl生成的-java接口"><span class="toc-text">2、实现.aidl生成的.java接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3、公开接口"><span class="toc-text">3、公开接口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、通过IPC-传递对象"><span class="toc-text">二、通过IPC 传递对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、-调用-IPC-方法"><span class="toc-text">三、 调用 IPC 方法</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <h1 id="Android-AIDL"><a href="#Android-AIDL" class="headerlink" title="Android AIDL"></a>Android AIDL</h1><p><code>AIDL：Android Interface Definition Language</code> 。用于<code>IPC （Inter-Process Communication，进程间通信）</code>，如 多应用间的通信，应用中存在多进程间的通信等场景。</p>
+<blockquote>
+<p>只有允许不同应用的客户端用 IPC 方式访问服务，并且想要在服务中处理多线程时，才有必要使用 AIDL。 如果您不需要执行跨越不同应用的并发 IPC，就应该通过<a href="https://developer.android.com/guide/components/bound-services.html#Binder" target="_blank" rel="noopener">实现一个 Binder</a> 创建接口；或者，如果您想执行 IPC，但根本不需要处理多线程，则<a href="https://developer.android.com/guide/components/bound-services.html#Messenger" target="_blank" rel="noopener">使用 Messenger 类</a>来实现接口</p>
+</blockquote>
+<h2 id="一、定义AIDL接口"><a href="#一、定义AIDL接口" class="headerlink" title="一、定义AIDL接口"></a>一、定义AIDL接口</h2><h3 id="1、创建-aidl-文件"><a href="#1、创建-aidl-文件" class="headerlink" title="1、创建 .aidl 文件"></a>1、创建 .aidl 文件</h3><p>在<strong>src</strong> 文件夹内创建<code>IRemoteService.aidl</code> 文件，如下。编译工程，此时会在创建相同名称的 <code>IRemoteService.java</code>文件。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// IRemoteService.aidl</span></span><br><span class="line"><span class="keyword">package</span> com.example.android;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Declare any non-default types here with import statements</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/** Example service interface */</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">IRemoteService</span> </span>&#123;</span><br><span class="line">    <span class="comment">/** Request the process ID of this service, to do evil things with it. */</span></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">getPid</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** Demonstrates some basic types that you can use as parameters</span></span><br><span class="line"><span class="comment">     * and return values in AIDL.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">basicTypes</span><span class="params">(<span class="keyword">int</span> anInt, <span class="keyword">long</span> aLong, <span class="keyword">boolean</span> aBoolean, <span class="keyword">float</span> aFloat,</span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="keyword">double</span> aDouble, String aString)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2、实现-aidl生成的-java接口"><a href="#2、实现-aidl生成的-java接口" class="headerlink" title="2、实现.aidl生成的.java接口"></a>2、实现.aidl生成的.java接口</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> IRemoteService.Stub mBinder = <span class="keyword">new</span> IRemoteService.Stub() &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getPid</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Process.myPid();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">basicTypes</span><span class="params">(<span class="keyword">int</span> anInt, <span class="keyword">long</span> aLong, <span class="keyword">boolean</span> aBoolean,</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="keyword">float</span> aFloat, <span class="keyword">double</span> aDouble, String aString)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Does nothing</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="3、公开接口"><a href="#3、公开接口" class="headerlink" title="3、公开接口"></a>3、公开接口</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RemoteService</span> <span class="keyword">extends</span> <span class="title">Service</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> IBinder <span class="title">onBind</span><span class="params">(Intent intent)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Return the interface</span></span><br><span class="line">        <span class="keyword">return</span> mBinder;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> IRemoteService.Stub mBinder = <span class="keyword">new</span> IRemoteService.Stub() &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getPid</span><span class="params">()</span></span>&#123;</span><br><span class="line">            <span class="keyword">return</span> Process.myPid();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">basicTypes</span><span class="params">(<span class="keyword">int</span> anInt, <span class="keyword">long</span> aLong, <span class="keyword">boolean</span> aBoolean,</span></span></span><br><span class="line"><span class="function"><span class="params">            <span class="keyword">float</span> aFloat, <span class="keyword">double</span> aDouble, String aString)</span> </span>&#123;</span><br><span class="line">            <span class="comment">// Does nothing</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="二、通过IPC-传递对象"><a href="#二、通过IPC-传递对象" class="headerlink" title="二、通过IPC 传递对象"></a>二、通过IPC 传递对象</h2><p>IPC 中传递的对象需要实现 <code>Parcelable</code> 接口 ，例如  <code>Rect.aidl</code> 文件可创建一个可打包的 <code>Rect</code> 类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> android.graphics;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Declare Rect so AIDL can find it and knows that it implements</span></span><br><span class="line"><span class="comment">// the parcelable protocol.</span></span><br><span class="line">parcelable Rect;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> android.os.Parcel;</span><br><span class="line"><span class="keyword">import</span> android.os.Parcelable;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">Rect</span> <span class="keyword">implements</span> <span class="title">Parcelable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> left;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> top;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> right;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> bottom;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> Parcelable.Creator&lt;Rect&gt; CREATOR = <span class="keyword">new</span></span><br><span class="line">Parcelable.Creator&lt;Rect&gt;() &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> Rect <span class="title">createFromParcel</span><span class="params">(Parcel in)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Rect(in);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> Rect[] newArray(<span class="keyword">int</span> size) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> Rect[size];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Rect</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">Rect</span><span class="params">(Parcel in)</span> </span>&#123;</span><br><span class="line">        readFromParcel(in);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">writeToParcel</span><span class="params">(Parcel out)</span> </span>&#123;</span><br><span class="line">        out.writeInt(left);</span><br><span class="line">        out.writeInt(top);</span><br><span class="line">        out.writeInt(right);</span><br><span class="line">        out.writeInt(bottom);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">readFromParcel</span><span class="params">(Parcel in)</span> </span>&#123;</span><br><span class="line">        left = in.readInt();</span><br><span class="line">        top = in.readInt();</span><br><span class="line">        right = in.readInt();</span><br><span class="line">        bottom = in.readInt();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="三、-调用-IPC-方法"><a href="#三、-调用-IPC-方法" class="headerlink" title="三、 调用 IPC 方法"></a>三、 调用 IPC 方法</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Binding</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line">    <span class="comment">/** The primary interface we will be calling on the service. */</span></span><br><span class="line">    IRemoteService mService = <span class="keyword">null</span>;</span><br><span class="line">    <span class="comment">/** Another interface we use on the service. */</span></span><br><span class="line">    ISecondary mSecondaryService = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    Button mKillButton;</span><br><span class="line">    TextView mCallbackText;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> mIsBound;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Standard initialization of this activity.  Set up the UI, then wait</span></span><br><span class="line"><span class="comment">     * for the user to poke it before doing anything.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line"></span><br><span class="line">        setContentView(R.layout.remote_service_binding);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Watch for button clicks.</span></span><br><span class="line">        Button button = (Button)findViewById(R.id.bind);</span><br><span class="line">        button.setOnClickListener(mBindListener);</span><br><span class="line">        button = (Button)findViewById(R.id.unbind);</span><br><span class="line">        button.setOnClickListener(mUnbindListener);</span><br><span class="line">        mKillButton = (Button)findViewById(R.id.kill);</span><br><span class="line">        mKillButton.setOnClickListener(mKillListener);</span><br><span class="line">        mKillButton.setEnabled(<span class="keyword">false</span>);</span><br><span class="line"></span><br><span class="line">        mCallbackText = (TextView)findViewById(R.id.callback);</span><br><span class="line">        mCallbackText.setText(<span class="string">"Not attached."</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Class for interacting with the main interface of the service.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> ServiceConnection mConnection = <span class="keyword">new</span> ServiceConnection() &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onServiceConnected</span><span class="params">(ComponentName className,</span></span></span><br><span class="line"><span class="function"><span class="params">                IBinder service)</span> </span>&#123;</span><br><span class="line">            <span class="comment">// This is called when the connection with the service has been</span></span><br><span class="line">            <span class="comment">// established, giving us the service object we can use to</span></span><br><span class="line">            <span class="comment">// interact with the service.  We are communicating with our</span></span><br><span class="line">            <span class="comment">// service through an IDL interface, so get a client-side</span></span><br><span class="line">            <span class="comment">// representation of that from the raw service object.</span></span><br><span class="line">            mService = IRemoteService.Stub.asInterface(service);</span><br><span class="line">            mKillButton.setEnabled(<span class="keyword">true</span>);</span><br><span class="line">            mCallbackText.setText(<span class="string">"Attached."</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// We want to monitor the service for as long as we are</span></span><br><span class="line">            <span class="comment">// connected to it.</span></span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                mService.registerCallback(mCallback);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (RemoteException e) &#123;</span><br><span class="line">                <span class="comment">// In this case the service has crashed before we could even</span></span><br><span class="line">                <span class="comment">// do anything with it; we can count on soon being</span></span><br><span class="line">                <span class="comment">// disconnected (and then reconnected if it can be restarted)</span></span><br><span class="line">                <span class="comment">// so there is no need to do anything here.</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// As part of the sample, tell the user what happened.</span></span><br><span class="line">            Toast.makeText(Binding.<span class="keyword">this</span>, R.string.remote_service_connected,</span><br><span class="line">                    Toast.LENGTH_SHORT).show();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onServiceDisconnected</span><span class="params">(ComponentName className)</span> </span>&#123;</span><br><span class="line">            <span class="comment">// This is called when the connection with the service has been</span></span><br><span class="line">            <span class="comment">// unexpectedly disconnected -- that is, its process crashed.</span></span><br><span class="line">            mService = <span class="keyword">null</span>;</span><br><span class="line">            mKillButton.setEnabled(<span class="keyword">false</span>);</span><br><span class="line">            mCallbackText.setText(<span class="string">"Disconnected."</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// As part of the sample, tell the user what happened.</span></span><br><span class="line">            Toast.makeText(Binding.<span class="keyword">this</span>, R.string.remote_service_disconnected,</span><br><span class="line">                    Toast.LENGTH_SHORT).show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * Class for interacting with the secondary interface of the service.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> ServiceConnection mSecondaryConnection = <span class="keyword">new</span> ServiceConnection() &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onServiceConnected</span><span class="params">(ComponentName className,</span></span></span><br><span class="line"><span class="function"><span class="params">                IBinder service)</span> </span>&#123;</span><br><span class="line">            <span class="comment">// Connecting to a secondary interface is the same as any</span></span><br><span class="line">            <span class="comment">// other interface.</span></span><br><span class="line">            mSecondaryService = ISecondary.Stub.asInterface(service);</span><br><span class="line">            mKillButton.setEnabled(<span class="keyword">true</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onServiceDisconnected</span><span class="params">(ComponentName className)</span> </span>&#123;</span><br><span class="line">            mSecondaryService = <span class="keyword">null</span>;</span><br><span class="line">            mKillButton.setEnabled(<span class="keyword">false</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> OnClickListener mBindListener = <span class="keyword">new</span> OnClickListener() &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">            <span class="comment">// Establish a couple connections with the service, binding</span></span><br><span class="line">            <span class="comment">// by interface names.  This allows other applications to be</span></span><br><span class="line">            <span class="comment">// installed that replace the remote service by implementing</span></span><br><span class="line">            <span class="comment">// the same interface.</span></span><br><span class="line">            Intent intent = <span class="keyword">new</span> Intent(Binding.<span class="keyword">this</span>, RemoteService.class);</span><br><span class="line">            intent.setAction(IRemoteService.class.getName());</span><br><span class="line">            bindService(intent, mConnection, Context.BIND_AUTO_CREATE);</span><br><span class="line">            intent.setAction(ISecondary.class.getName());</span><br><span class="line">            bindService(intent, mSecondaryConnection, Context.BIND_AUTO_CREATE);</span><br><span class="line">            mIsBound = <span class="keyword">true</span>;</span><br><span class="line">            mCallbackText.setText(<span class="string">"Binding."</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> OnClickListener mUnbindListener = <span class="keyword">new</span> OnClickListener() &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (mIsBound) &#123;</span><br><span class="line">                <span class="comment">// If we have received the service, and hence registered with</span></span><br><span class="line">                <span class="comment">// it, then now is the time to unregister.</span></span><br><span class="line">                <span class="keyword">if</span> (mService != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    <span class="keyword">try</span> &#123;</span><br><span class="line">                        mService.unregisterCallback(mCallback);</span><br><span class="line">                    &#125; <span class="keyword">catch</span> (RemoteException e) &#123;</span><br><span class="line">                        <span class="comment">// There is nothing special we need to do if the service</span></span><br><span class="line">                        <span class="comment">// has crashed.</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// Detach our existing connection.</span></span><br><span class="line">                unbindService(mConnection);</span><br><span class="line">                unbindService(mSecondaryConnection);</span><br><span class="line">                mKillButton.setEnabled(<span class="keyword">false</span>);</span><br><span class="line">                mIsBound = <span class="keyword">false</span>;</span><br><span class="line">                mCallbackText.setText(<span class="string">"Unbinding."</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> OnClickListener mKillListener = <span class="keyword">new</span> OnClickListener() &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">            <span class="comment">// To kill the process hosting our service, we need to know its</span></span><br><span class="line">            <span class="comment">// PID.  Conveniently our service has a call that will return</span></span><br><span class="line">            <span class="comment">// to us that information.</span></span><br><span class="line">            <span class="keyword">if</span> (mSecondaryService != <span class="keyword">null</span>) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">int</span> pid = mSecondaryService.getPid();</span><br><span class="line">                    <span class="comment">// Note that, though this API allows us to request to</span></span><br><span class="line">                    <span class="comment">// kill any process based on its PID, the kernel will</span></span><br><span class="line">                    <span class="comment">// still impose standard restrictions on which PIDs you</span></span><br><span class="line">                    <span class="comment">// are actually able to kill.  Typically this means only</span></span><br><span class="line">                    <span class="comment">// the process running your application and any additional</span></span><br><span class="line">                    <span class="comment">// processes created by that app as shown here; packages</span></span><br><span class="line">                    <span class="comment">// sharing a common UID will also be able to kill each</span></span><br><span class="line">                    <span class="comment">// other's processes.</span></span><br><span class="line">                    Process.killProcess(pid);</span><br><span class="line">                    mCallbackText.setText(<span class="string">"Killed service process."</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (RemoteException ex) &#123;</span><br><span class="line">                    <span class="comment">// Recover gracefully from the process hosting the</span></span><br><span class="line">                    <span class="comment">// server dying.</span></span><br><span class="line">                    <span class="comment">// Just for purposes of the sample, put up a notification.</span></span><br><span class="line">                    Toast.makeText(Binding.<span class="keyword">this</span>,</span><br><span class="line">                            R.string.remote_call_failed,</span><br><span class="line">                            Toast.LENGTH_SHORT).show();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ----------------------------------------------------------------------</span></span><br><span class="line">    <span class="comment">// Code showing how to deal with callbacks.</span></span><br><span class="line">    <span class="comment">// ----------------------------------------------------------------------</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * This implementation is used to receive callbacks from the remote</span></span><br><span class="line"><span class="comment">     * service.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> IRemoteServiceCallback mCallback = <span class="keyword">new</span> IRemoteServiceCallback.Stub() &#123;</span><br><span class="line">        <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * This is called by the remote service regularly to tell us about</span></span><br><span class="line"><span class="comment">         * new values.  Note that IPC calls are dispatched through a thread</span></span><br><span class="line"><span class="comment">         * pool running in each process, so the code executing here will</span></span><br><span class="line"><span class="comment">         * NOT be running in our main thread like most other things -- so,</span></span><br><span class="line"><span class="comment">         * to update the UI, we need to use a Handler to hop over there.</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">valueChanged</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">            mHandler.sendMessage(mHandler.obtainMessage(BUMP_MSG, value, <span class="number">0</span>));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> BUMP_MSG = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Handler mHandler = <span class="keyword">new</span> Handler() &#123;</span><br><span class="line">        <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">switch</span> (msg.what) &#123;</span><br><span class="line">                <span class="keyword">case</span> BUMP_MSG:</span><br><span class="line">                    mCallbackText.setText(<span class="string">"Received from service: "</span> + msg.arg1);</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                    <span class="keyword">super</span>.handleMessage(msg);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>参考：</p>
+<p>[1]、<a href="https://developer.android.com/guide/components/aidl.html" target="_blank" rel="noopener">Android AIDL</a></p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Android/">Android</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/06/18/Android Service 一/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Android Service 一</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/06/18/Android 广播/">
+        <span class="next-text nav-default">Android broadcast</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:tan2junze@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/tanjunze" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">tanjunze</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
+</html>
