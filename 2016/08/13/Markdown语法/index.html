@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="Marketdown 语法"/>
+
+
+
+
+  <meta name="keywords" content="Marketdown, Tanjunze笔记" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tanjunze笔记">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2" />
+
+
+
+<link rel="canonical" href="https://tanjunze.github.io/2016/08/13/Markdown语法/"/>
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css" />
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2" />
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null},"toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title> Marketdown 语法 - Tanjunze笔记 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Tanjunze笔记</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Tanjunze笔记</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Marketdown 语法
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-08-12
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/Marketdown/">Marketdown</a>
+            
+          </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Markdown"><span class="toc-text">Markdown</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#概况"><span class="toc-text">概况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#段落和换行符"><span class="toc-text">段落和换行符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#标题"><span class="toc-text">标题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#分割线"><span class="toc-text">分割线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引用"><span class="toc-text">引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#列表"><span class="toc-text">列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#任务列表"><span class="toc-text">任务列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#代码块"><span class="toc-text">代码块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#表格"><span class="toc-text">表格</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#链接"><span class="toc-text">链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#图片"><span class="toc-text">图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#斜体"><span class="toc-text">斜体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#粗体"><span class="toc-text">粗体</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除线"><span class="toc-text">删除线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下划线"><span class="toc-text">下划线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#下标"><span class="toc-text">下标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#上标"><span class="toc-text">上标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#高亮"><span class="toc-text">高亮</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Html-片段"><span class="toc-text">Html 片段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#反义"><span class="toc-text">反义</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <h1 id="Markdown"><a href="#Markdown" class="headerlink" title="Markdown"></a>Markdown</h1><h3 id="概况"><a href="#概况" class="headerlink" title="概况"></a>概况</h3><p><strong><a href="http://daringfireball.net/projects/markdown/syntax" target="_blank" rel="noopener">Markdown</a></strong> 是由 <a href="http://daringfireball.net/" target="_blank" rel="noopener">Daring Fireball</a> 创建的轻量级标记语言</p>
+<h3 id="段落和换行符"><a href="#段落和换行符" class="headerlink" title="段落和换行符"></a>段落和换行符</h3><p>段落由多个空行分隔</p>
+<h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h3><p>标题在行的开头使用 1-6 个  <code>#</code>  对应标题1-6个级别，例如：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 一级标题 H1</span></span><br><span class="line"></span><br><span class="line"><span class="section">## 二级标题 H2</span></span><br><span class="line"></span><br><span class="line"><span class="section">###### 六级标题 H6</span></span><br></pre></td></tr></table></figure>
+<p>另一种使用方式, 在一行中使用多个连续的 <code>#</code>表示 <strong>一级标题</strong> ，使用连续的<code>-</code>表示 <strong>二级标题</strong>。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">一级标题</span><br><span class="line">===============</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">二级标题</span><br><span class="line">---------------</span><br></pre></td></tr></table></figure>
+<h3 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h3><p>使用 <code>***</code> 或 <code>---</code> 表示分割线，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">----</span><br></pre></td></tr></table></figure>
+<p>显示如下：</p>
+<hr>
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p> 使用 <code>&gt;</code>  表示引用。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="quote">&gt; 引用1</span></span><br><span class="line"></span><br><span class="line"><span class="quote">&gt; 引用2</span></span><br></pre></td></tr></table></figure>
+<h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h3><p>使用 <code>*</code> 表示无序列表，或者使用 <code>+</code> 或 <code>-</code> 替代。</p>
+<p>使用数字如<code>1.</code> 表示有序列表。例如：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">## 无序列表</span></span><br><span class="line"><span class="bullet">*   </span>Red</span><br><span class="line"><span class="bullet">*   </span>Green</span><br><span class="line"><span class="bullet">*   </span>Blue</span><br><span class="line"></span><br><span class="line"><span class="section">## 有序列表</span></span><br><span class="line"><span class="bullet">1.  </span>Red</span><br><span class="line"><span class="bullet">2. 	</span>Green</span><br><span class="line"><span class="bullet">3.	</span>Blue</span><br></pre></td></tr></table></figure>
+<h3 id="任务列表"><a href="#任务列表" class="headerlink" title="任务列表"></a>任务列表</h3><p>任务列表使用<code>- [ ]</code> 或<code>- [x]</code> 表示任务的<code>未完成</code> 或 <code>完成</code> 状态。 例如：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">- </span>[ ] 未完成 任务选项</span><br><span class="line"><span class="bullet">- </span>[x] 完成 任务选项</span><br></pre></td></tr></table></figure>
+<h3 id="代码块"><a href="#代码块" class="headerlink" title="代码块"></a>代码块</h3><p>使用 一对  <code>`</code> 表示单行代码，使用一对 <code></code> <figure class="highlight plain"><figcaption><span>多行代码。 例如：</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">~~~ gfm</span><br><span class="line">单行代码示例：</span><br><span class="line">my function name is ` test() `</span><br><span class="line"></span><br><span class="line">多行代码示例：</span><br></pre></td></tr></table></figure></p>
+<p>function test() {<br>  console.log(“notice the blank line before this function?”);<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">代码高亮（代码类型）:</span><br><span class="line">```ruby</span><br><span class="line">require &apos;redcarpet&apos;</span><br><span class="line">markdown = Redcarpet.new(&quot;Hello World!&quot;)</span><br><span class="line">puts markdown.to_html</span><br></pre></td></tr></table></figure></p>
+<p>~~~</p>
+<p>如果需要在代码中使用单引号，需要使用<strong><code></code></strong>来规避，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">``这个 `代码` 是错误的``</span><br></pre></td></tr></table></figure>
+<p>显示如下：</p>
+<p><code>这个 `代码` 是错误的</code></p>
+<h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h3><p>示例: </p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">| 标题1  | 标题1 |</span><br><span class="line">| ----- | ----- |</span><br><span class="line">| 内容1  | 内容2 |</span><br></pre></td></tr></table></figure>
+<p>在标题和内容间的<code>——</code> 添加 <code>:</code> 表示对齐方式，如<code>:-----</code> 左对齐、<code>:-----:</code>居中对齐，<code>-----:</code>右对齐，例如：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">| 左对齐 | 居中对齐  | 右对齐 |</span><br><span class="line">| :----- |:-----:| -----:|</span><br><span class="line">| col 3 is | some wordy text | $1600 |</span><br><span class="line">| col 2 is | centered        |   $12 |</span><br><span class="line">| zebra stripes | are neat        |    $1 |</span><br></pre></td></tr></table></figure>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>使用<code>[]()</code>组成。例如：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">示例网址</span>](<span class="link">http://example.com/</span>)</span><br></pre></td></tr></table></figure>
+<p>显示如下：</p>
+<p><a href="http://example.com/" target="_blank" rel="noopener">示例网址</a></p>
+<h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><p>使用<code>![]()</code>组成。例如：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 图片相对路径</span></span><br><span class="line">![<span class="string">本地图片</span>](<span class="link">/path/img.png</span>)</span><br><span class="line"><span class="section"># 图片http 路径</span></span><br><span class="line">![<span class="string">网络图片</span>](<span class="link">https://d33wubrfki0l68.cloudfront.net/e7ed9fe4bafe46e275c807d63591f85f9ab246ba/e2d28/assets/images/tux.png</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="斜体"><a href="#斜体" class="headerlink" title="斜体"></a>斜体</h3><p>使用 单个<code>*</code> 或单个 (<code>_</code>) 表示斜体，例如：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="emphasis">*斜体1*</span></span><br></pre></td></tr></table></figure>
+<p>显示如下： </p>
+<p><em>斜体1</em></p>
+<h3 id="粗体"><a href="#粗体" class="headerlink" title="粗体"></a>粗体</h3><p>使用一对<code>**</code>表示粗体，例如：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="strong">**粗体**</span></span><br></pre></td></tr></table></figure>
+<p><strong>粗体</strong></p>
+<h3 id="删除线"><a href="#删除线" class="headerlink" title="删除线"></a>删除线</h3><p>使用一对<code>~~</code> 表示删除线（非标准语法，GFM中使用）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~~不要了~~</span><br></pre></td></tr></table></figure>
+<p>显示如下：</p>
+<p><del>不要了</del></p>
+<h3 id="下划线"><a href="#下划线" class="headerlink" title="下划线"></a>下划线</h3><p>可以使用html标签<code>&lt;u&gt; &lt;/u&gt;</code>表示，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;u&gt; 下划线 &lt;/u&gt;</span><br></pre></td></tr></table></figure>
+<p>显示如下：</p>
+<p><u>下划线</u></p>
+<h3 id="下标"><a href="#下标" class="headerlink" title="下标"></a>下标</h3><p>使用 <code>~</code>表示下标， 例如: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">H~2~O    X~long\ text~</span><br></pre></td></tr></table></figure>
+<p>显示如下：</p>
+<p>H~2~O</p>
+<p>X~long\ text~</p>
+<h3 id="上标"><a href="#上标" class="headerlink" title="上标"></a>上标</h3><p>使用 <code>^</code> 表示上标, 例如: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X^2^</span><br></pre></td></tr></table></figure>
+<p>显示如下：</p>
+<p>X^2^</p>
+<h3 id="高亮"><a href="#高亮" class="headerlink" title="高亮"></a>高亮</h3><p>使用 <code>==</code> 表示高亮， 例如: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">==高亮文字==</span><br></pre></td></tr></table></figure>
+<p>显示如下：</p>
+<p>==高亮文字==</p>
+<h3 id="Html-片段"><a href="#Html-片段" class="headerlink" title="Html 片段"></a>Html 片段</h3><p>例如 ：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;span style=&quot;color:red&quot;&gt;红色文字&lt;/span&gt;</span><br></pre></td></tr></table></figure></p>
+<p>显示如下：</p>
+<p><span style="color:red">红色文字</span></p>
+<h3 id="反义"><a href="#反义" class="headerlink" title="反义"></a>反义</h3><p>使用<code>\</code> 反义 markdown中的关键字，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\* 如果没有反斜杠,这将是无序列表</span><br></pre></td></tr></table></figure>
+<p>显示如下：</p>
+<p>* 如果没有反斜杠,这将是无序列表</p>
+<p><strong>可以使用反义的关键字</strong></p>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>名称</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\</code></td>
+<td>反斜线</td>
+</tr>
+<tr>
+<td><code>`</code></td>
+<td>刻度线</td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>星号</td>
+</tr>
+<tr>
+<td><code>_</code></td>
+<td>下划线</td>
+</tr>
+<tr>
+<td><code>{}</code></td>
+<td>大括号</td>
+</tr>
+<tr>
+<td><code>[]</code></td>
+<td>括号</td>
+</tr>
+<tr>
+<td><code>()</code></td>
+<td>括弧</td>
+</tr>
+<tr>
+<td><code>#</code></td>
+<td>英镑符号</td>
+</tr>
+<tr>
+<td><code>+</code></td>
+<td>加号</td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>减号（连字符）</td>
+</tr>
+<tr>
+<td><code>.</code></td>
+<td>点</td>
+</tr>
+<tr>
+<td><code>!</code></td>
+<td>感叹号</td>
+</tr>
+</tbody>
+</table>
+<p>参考网址：</p>
+<p>[1]、<a href="https://www.markdownguide.org/basic-syntax" target="_blank" rel="noopener">markdownguide</a></p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Marketdown/">Marketdown</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/03/22/react native整理/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">React Native 整理</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:tan2junze@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/tanjunze" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">tanjunze</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
+</html>

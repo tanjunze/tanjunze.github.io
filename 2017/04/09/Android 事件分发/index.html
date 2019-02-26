@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="Android 事件分发"/>
+
+
+
+
+  <meta name="keywords" content="Android, Tanjunze笔记" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tanjunze笔记">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2" />
+
+
+
+<link rel="canonical" href="https://tanjunze.github.io/2017/04/09/Android 事件分发/"/>
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css" />
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2" />
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null},"toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title> Android 事件分发 - Tanjunze笔记 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Tanjunze笔记</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Tanjunze笔记</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Android 事件分发
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-04-09
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/Android/">Android</a>
+            
+          </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Android-事件分发"><span class="toc-text">Android 事件分发</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#View-体系"><span class="toc-text">View 体系</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事件分发"><span class="toc-text">事件分发</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <h1 id="Android-事件分发"><a href="#Android-事件分发" class="headerlink" title="Android 事件分发"></a>Android 事件分发</h1><p>在梳理Android事件分发之前，我们先要理解什么是 <strong>事件分发</strong>，理解事件分发对我们有哪些作用。首先Android  View是树形结构的，View可能会重叠在一起，当我们点击的地方有多个View都可以响应, Android 中事件分发指的是 点击事件  从点击开始分发到 事件被消费响应的一系列过程，当中包括 事件的分发，拦截，消费等过程。掌握好事件分发的过程可以做出酷炫的交互和解决一些复杂的交互冲突过程如 双重滚动嵌套。</p>
+<h3 id="View-体系"><a href="#View-体系" class="headerlink" title="View 体系"></a>View 体系</h3><p>在理解 <strong>事件分发</strong>之前我们先看一下View的体系。</p>
+<p><img src="/images/phone_view.png" alt=""></p>
+<p><code>phoneWindow</code>是Android 中特殊的window，它继承自<code>window</code>类负责具体所有视图的外观和行为。</p>
+<p><code>DecorView</code>是window的具体装饰，是window中最顶层的view。</p>
+<p> <code>RootView</code>是一个ViewGorup类型，仅次于 DecorView 的view。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 源码 phonwWindow.java ,省略部分代码。</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PhoneWindow</span> <span class="keyword">extends</span> <span class="title">Window</span> <span class="keyword">implements</span> <span class="title">MenuBuilder</span>.<span class="title">Callback</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String TAG = <span class="string">"PhoneWindow"</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// This is the top-level view of the window, containing the window decor.</span></span><br><span class="line">    <span class="keyword">private</span> DecorView mDecor;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//源码 DecorView.java ,省略部分代码。</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DecorView</span> <span class="keyword">extends</span> <span class="title">FrameLayout</span> <span class="keyword">implements</span> <span class="title">RootViewSurfaceTaker</span>, <span class="title">WindowCallbacks</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"DecorView"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> PhoneWindow mWindow;</span><br><span class="line"></span><br><span class="line">    ViewGroup mContentRoot;</span><br></pre></td></tr></table></figure>
+<p>到这里虽然我们了解了<code>phoneWindow</code>,<code>DecorView</code>,<code>RootView</code>，但是事件分发中我们无法操作这三个类，不过</p>
+<p>可以帮助我们更好的理解分发的过程。</p>
+<h3 id="事件分发"><a href="#事件分发" class="headerlink" title="事件分发"></a>事件分发</h3><p><code>ViewGroup</code>，<code>View</code>是我们常用到的控件，这里不在过多的描述，重点关注 事件分发中需要用到的关键方法。</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>相关方法</th>
+<th>Activity</th>
+<th>ViewGroup</th>
+<th>View</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>事件分发</td>
+<td>dispatchTouchEvent</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>事件拦截</td>
+<td>onInterceptTouchEvent</td>
+<td>X</td>
+<td>√</td>
+<td>X</td>
+</tr>
+<tr>
+<td>事件消费</td>
+<td>onTouchEvent</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+</tbody>
+</table>
+<p>结合View体系，我们可以了解事件分发的基本流程。</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Activity －&gt; PhoneWindow －&gt; DecorView －&gt; ViewGroup －&gt; ... －&gt; View</span><br></pre></td></tr></table></figure>
+<p>当事件没有被消费是，向上反馈。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Activity &lt;－ PhoneWindow &lt;－ DecorView &lt;－ ViewGroup &lt;－ ... &lt;－ View</span><br></pre></td></tr></table></figure>
+<p><img src="/images/event_dispath.jpg" alt=""></p>
+<p>到这里，事件分发的基本流程已经完。有时间再补一下完善一点的事件分发的流程吧。</p>
+<hr>
+<p>参考：</p>
+<p>[1]、<a href="http://www.gcssloop.com/customview/dispatch-touchevent-source" target="_blank" rel="noopener">http://www.gcssloop.com/customview/dispatch-touchevent-source</a></p>
+<p>[2]、<a href="http://hukai.me/android-deeper-touch-event-dispatch-process/" target="_blank" rel="noopener">http://hukai.me/android-deeper-touch-event-dispatch-process/</a></p>
+<p>[3]、 Android 源码</p>
+<p>[4]、<a href="https://www.programering.com/a/MzMyYzMwATA.html" target="_blank" rel="noopener">https://www.programering.com/a/MzMyYzMwATA.html</a></p>
+<p>[5]、<a href="https://juejin.im/entry/5a33399f6fb9a04517053e75" target="_blank" rel="noopener">https://juejin.im/entry/5a33399f6fb9a04517053e75</a></p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Android/">Android</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/04/17/Android 广播/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Android broadcast</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/03/22/react native整理/">
+        <span class="next-text nav-default">React Native 整理</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:tan2junze@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/tanjunze" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">tanjunze</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
+</html>

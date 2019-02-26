@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="Android Activity"/>
+
+
+
+
+  <meta name="keywords" content="Android, Tanjunze笔记" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tanjunze笔记">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2" />
+
+
+
+<link rel="canonical" href="https://tanjunze.github.io/2017/05/03/Android Activity/"/>
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css" />
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2" />
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null},"toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title> Android Activity - Tanjunze笔记 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Tanjunze笔记</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Tanjunze笔记</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Android Activity
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-05-02
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/Android/">Android</a>
+            
+          </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Android-Activity"><span class="toc-text">Android Activity</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Activity-的生命周期"><span class="toc-text">一、Activity 的生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、生命周期"><span class="toc-text">1、生命周期</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、异常生命周期"><span class="toc-text">2、异常生命周期</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、启动模式"><span class="toc-text">二、启动模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1，standard-标准模式"><span class="toc-text">1，standard 标准模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2，singleTop-栈定复用模式"><span class="toc-text">2，singleTop 栈定复用模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3，singleTask-栈内复用模式"><span class="toc-text">3，singleTask 栈内复用模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4，singleInstance-单实例模式"><span class="toc-text">4，singleInstance 单实例模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、任务栈"><span class="toc-text">三、任务栈</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#处理任务栈"><span class="toc-text">处理任务栈</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、Activity启动方式"><span class="toc-text">四、Activity启动方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、显示启动"><span class="toc-text">1、显示启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、隐式启动"><span class="toc-text">2、隐式启动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、扩展"><span class="toc-text">五、扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#架构组件"><span class="toc-text">架构组件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#数据库-Room"><span class="toc-text">数据库 Room</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LiveData"><span class="toc-text">LiveData</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ViewModel"><span class="toc-text">ViewModel</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <h1 id="Android-Activity"><a href="#Android-Activity" class="headerlink" title="Android Activity"></a>Android Activity</h1><h2 id="一、Activity-的生命周期"><a href="#一、Activity-的生命周期" class="headerlink" title="一、Activity 的生命周期"></a>一、Activity 的生命周期</h2><h3 id="1、生命周期"><a href="#1、生命周期" class="headerlink" title="1、生命周期"></a>1、生命周期</h3><p><img src="/images/activity_lifecycle.png" alt=""></p>
+<p>（1）如果打开新的Activity并且新的Activity使用透明主题，那么当前Activity不会调用onStop。</p>
+<p>（2）打开新的Activity时，当前Activity及新Activity生命周期顺序如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">MainActivity----onPause</span><br><span class="line">SecondActivity----onCreate</span><br><span class="line">SecondActivity----onStart</span><br><span class="line">SecondActivity----onResume</span><br><span class="line">MainActivity----onStop</span><br></pre></td></tr></table></figure>
+<h3 id="2、异常生命周期"><a href="#2、异常生命周期" class="headerlink" title="2、异常生命周期"></a>2、异常生命周期</h3><p><strong>原因：</strong></p>
+<p>（1）资源相关的系统配置发生改变导致的Activity被杀死并重新创建。<br>           如：旋转屏幕，键盘改变等..…</p>
+<p>（2) 资源内存不足导致低优先级的Activity被杀死。</p>
+<p> <strong>Activty优先级顺序</strong></p>
+<p> 1、前台Activty,正在和用户交互的Activity，优先级最高。</p>
+<p> 2、可见但非前台Activity，如在Activity中弹出对话框。</p>
+<p> 3、后台Activity，如执行了<strong>onStop()</strong>，优先级最低。</p>
+<p><strong>解决</strong></p>
+<p> （1）在<strong>onSaveInstanceState()</strong>,<strong>onRestoreInstanceState()</strong>保存恢复数据<br> （2）在android 工程目录下<strong>AndroidManifest</strong>中配置如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:configChanges=&quot;screenSize|orientation&quot;</span><br></pre></td></tr></table></figure>
+<p> configChanges：如下</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">项目</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">mcc</td>
+<td style="text-align:center">IMSI(国际移动用户识别码)发生改变，检测到SIM卡，或者更新MCC</td>
+</tr>
+<tr>
+<td style="text-align:left">mnc</td>
+<td style="text-align:center">IMSI网络发生改变,检测到SIM卡，或者更新MCC</td>
+</tr>
+<tr>
+<td style="text-align:left">locale</td>
+<td style="text-align:center">语言发生改变，用户选择了一个新的语言，文字应该重新显示</td>
+</tr>
+<tr>
+<td style="text-align:left">touchscreen</td>
+<td style="text-align:center">触摸屏发生改变，这通常是不应该发生的</td>
+</tr>
+<tr>
+<td style="text-align:left">keyboard</td>
+<td style="text-align:center">键盘类型发生改变，例如，用户使用了外部键盘</td>
+</tr>
+<tr>
+<td style="text-align:left">keyboardHidden</td>
+<td style="text-align:center">键盘发生改变，例如，用户使用了硬件键盘</td>
+</tr>
+<tr>
+<td style="text-align:left">navigation</td>
+<td style="text-align:center">导航发生改变</td>
+</tr>
+<tr>
+<td style="text-align:left">screenLayout</td>
+<td style="text-align:center">屏幕的布局发生改变，这可能导致激活不同的显示</td>
+</tr>
+<tr>
+<td style="text-align:left">fontScale</td>
+<td style="text-align:center">全局字体大小缩放发生改变</td>
+</tr>
+<tr>
+<td style="text-align:left">orientation</td>
+<td style="text-align:center">设备旋转，横向显示和竖向显示模式切换</td>
+</tr>
+<tr>
+<td style="text-align:left">screenSize</td>
+<td style="text-align:center">屏幕大小改变了</td>
+</tr>
+<tr>
+<td style="text-align:left">smallestScreenSize</td>
+<td style="text-align:center">屏幕的物理大小改变了，如：连接到一个外部的屏幕上</td>
+</tr>
+</tbody>
+</table>
+<h2 id="二、启动模式"><a href="#二、启动模式" class="headerlink" title="二、启动模式"></a>二、启动模式</h2><h3 id="1，standard-标准模式"><a href="#1，standard-标准模式" class="headerlink" title="1，standard 标准模式"></a>1，<code>standard 标准模式</code></h3><p>   每启动一个Activity都会重新创建一个新的Activity实例。当一个Activity启动这种模式下新的Activity，新的Activity就会进入启动它Activity的任务栈中。</p>
+<h3 id="2，singleTop-栈定复用模式"><a href="#2，singleTop-栈定复用模式" class="headerlink" title="2，singleTop 栈定复用模式"></a>2，<code>singleTop 栈定复用模式</code></h3><p>这种模式下，如果新的Activity的实例已经位于任务栈的栈顶，那么新的Activity就不会重新创建，此时它的<strong>onNewIntent()</strong>被调用。如果新的Activity的实例不位于栈顶，那么就会重新创建。</p>
+<h3 id="3，singleTask-栈内复用模式"><a href="#3，singleTask-栈内复用模式" class="headerlink" title="3，singleTask 栈内复用模式"></a>3，<code>singleTask 栈内复用模式</code></h3><p>这是一种单一任务栈。，系统会创建一个新的任务，并将启动的Activity放入这个新任务的栈底位置。但是，如果现有任务当中已经存在一个该Activity的实例了，那么系统就不会再创建一次它的实例，而是复用这个已经存在的activity，调用 onNewIntent() 方法，并且清空这个activity任务栈上面所有的activity</p>
+<h3 id="4，singleInstance-单实例模式"><a href="#4，singleInstance-单实例模式" class="headerlink" title="4，singleInstance 单实例模式"></a>4，<code>singleInstance 单实例模式</code></h3><p>单实例模式。这种模式下的Activity只单独的位于独立的任务栈中。整个手机操作系统里面只有一个实例存在。不同的应用去打开这个activity共享 公用的同一个activity。他会运行在自己单独，独立的任务栈里面，并且任务栈里面只有他一个实例存在</p>
+<p><strong>Activity的Flage</strong></p>
+<p>1.<code>FLAGE_ACTIVITY_NEW_TASK</code></p>
+<p> 新启动Activity就会被放置到一个新的任务当中(与“singleTask”有点类似）</p>
+<p> 2.<code>FLAGE_ACTIVITY_SINGLE_TOP</code></p>
+<p> 作用于<strong>singleTop</strong>启动模式效果一样</p>
+<p> 3.<code>FLAGE_ACTIVITY_CLEAR_TOP</code></p>
+<p> 如果要启动的Activity在当前任务中已经存在了，就不会再次创建这个Activity的实例，而是会把这个Activity之上的所有Activity全部关闭掉</p>
+<h2 id="三、任务栈"><a href="#三、任务栈" class="headerlink" title="三、任务栈"></a>三、任务栈</h2><h3 id="处理任务栈"><a href="#处理任务栈" class="headerlink" title="处理任务栈"></a>处理任务栈</h3><p><strong>处理affinity</strong><br> affinity可以用于指定一个Activity更加愿意依附于哪一个任务，在默认情况下，同一个应用程序中的所有Activity都具有相同的affinity，所以，这些Activity都更加倾向于运行在相同的任务当中。当然了，你也可以去改变每个Activity的affinity值，通过<activity>元素的taskAffinity属性就可以实现了</activity></p>
+<p><strong>alwaysRetainTaskState</strong><br>如果将最底层的那个Activity的这个属性设置为true，那么上面所描述的默认行为就将不会发生，任务中所有的Activity即使过了很长一段时间之后仍然会被继续保留。</p>
+<p><strong>clearTaskOnLaunch</strong><br>如果将最底层的那个Activity的这个属性设置为true，那么只要用户离开了当前任务，再次返回的时候就会将最底层Activity之上的所有其它Activity全部清除掉。简单来讲，就是一种和alwaysRetainTaskState完全相反的工作模式，它保证每次返回任务的时候都会是一种初始化状态，即使用户仅仅离开了很短的一段时间。</p>
+<p><strong>finishOnTaskLaunch</strong><br>这个属性和clearTaskOnLaunch是比较类似的，不过它不是作用于整个任务上的，而是作用于单个Activity上。如果某个Activity将这个属性设置成true，那么用户一旦离开了当前任务，再次返回时这个Activity就会被清除掉。</p>
+<h2 id="四、Activity启动方式"><a href="#四、Activity启动方式" class="headerlink" title="四、Activity启动方式"></a>四、Activity启动方式</h2><h3 id="1、显示启动"><a href="#1、显示启动" class="headerlink" title="1、显示启动"></a>1、显示启动</h3><p> 显示启动需要明确的指定被启动对象的组件信息，包括包名和类名</p>
+<h3 id="2、隐式启动"><a href="#2、隐式启动" class="headerlink" title="2、隐式启动"></a>2、隐式启动</h3><p> 隐式启动的<strong>Intent</strong>能够匹配目标组件的一组<strong>IntentFilter</strong>中的信息（即匹配一组<strong>IntentFilter的 Action,Category,Data</strong>）。<br> 在<strong>AndroidManifest.xml</strong>中一个activity 可以有多个<strong>IntentFilter</strong> 在<strong>IntentFilter</strong>中也可以有多组<strong>Action,Category,Data</strong><br> IntentFilter中匹配规则</p>
+<p><strong>IntentFilter</strong>有“<strong>Action,Category,Data</strong>”的三种匹配方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public void playMedia(Uri file) &#123;</span><br><span class="line">    Intent intent = new Intent(Intent.ACTION_VIEW);</span><br><span class="line">    intent.setData(file);</span><br><span class="line">    if (intent.resolveActivity(getPackageManager()) != null) &#123;</span><br><span class="line">        startActivity(intent);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity ...&gt;</span><br><span class="line">    &lt;intent-filter&gt;</span><br><span class="line">        &lt;action android:name=&quot;android.intent.action.VIEW&quot; /&gt;</span><br><span class="line">        &lt;data android:type=&quot;audio/*&quot; /&gt;</span><br><span class="line">        &lt;data android:type=&quot;application/ogg&quot; /&gt;</span><br><span class="line">        &lt;category android:name=&quot;android.intent.category.DEFAULT&quot; /&gt;</span><br><span class="line">    &lt;/intent-filter&gt;</span><br><span class="line">&lt;/activity&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="五、扩展"><a href="#五、扩展" class="headerlink" title="五、扩展"></a>五、扩展</h2><h3 id="架构组件"><a href="#架构组件" class="headerlink" title="架构组件"></a><a href="https://developer.android.com/topic/libraries/architecture" target="_blank" rel="noopener">架构组件</a></h3><h4 id="数据库-Room"><a href="#数据库-Room" class="headerlink" title="数据库 Room"></a><a href="https://developer.android.com/topic/libraries/architecture/room" target="_blank" rel="noopener">数据库 Room</a></h4><h4 id="LiveData"><a href="#LiveData" class="headerlink" title="LiveData"></a><a href="https://developer.android.com/topic/libraries/architecture/livedata" target="_blank" rel="noopener">LiveData</a></h4><h4 id="ViewModel"><a href="#ViewModel" class="headerlink" title="ViewModel"></a><a href="https://developer.android.com/topic/libraries/architecture/viewmodel" target="_blank" rel="noopener">ViewModel</a></h4><p>参考：</p>
+<p>[1]、<a href="https://developer.android.com/guide/components/activities/activity-lifecycle" target="_blank" rel="noopener">Activity Lifecycle</a></p>
+<p>[2]、<a href="https://developer.android.com/guide/components/activities/tasks-and-back-stack" target="_blank" rel="noopener">Android Tasks and Back Stack</a></p>
+<p>[3]、<a href="https://developer.android.com/guide/components/activities/intro-activities?hl=zh-cn" target="_blank" rel="noopener">Android Activities</a></p>
+<p>[4]、<a href="https://developer.android.com/training/basics/intents" target="_blank" rel="noopener">Android Intents</a></p>
+<p>[4]、<a href="https://developer.android.com/guide/components/intents-filter" target="_blank" rel="noopener">Android intents-filter</a></p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Android/">Android</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/08/17/上传文件到远程主机/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">上传本地文件到远程linux主机</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/04/17/Android 广播/">
+        <span class="next-text nav-default">Android broadcast</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:tan2junze@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/tanjunze" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">tanjunze</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
+</html>
