@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="Android 自定义View">
+
+
+
+
+  <meta name="keywords" content="Android, Tanjunze笔记">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tanjunze笔记">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2">
+
+
+
+<link rel="canonical" href="https://tanjunze.github.io/2017/09/25/Android自定义View/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null},"toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title> Android 自定义View - Tanjunze笔记 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Tanjunze笔记</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Tanjunze笔记</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Android 自定义View
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2017-09-24
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/Android/">Android</a>
+            
+          </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Android-自定义View"><span class="toc-text">Android 自定义View</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义View"><span class="toc-text">自定义View</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实现View"><span class="toc-text">实现View</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自定义属性"><span class="toc-text">自定义属性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1、定义自定义属性"><span class="toc-text">1、定义自定义属性</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2、使用自定义属性"><span class="toc-text">2、使用自定义属性</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#绘制文本"><span class="toc-text">绘制文本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#测量宽高"><span class="toc-text">测量宽高</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#添加属性和事件"><span class="toc-text">添加属性和事件</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义ViewGroup"><span class="toc-text">自定义ViewGroup</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#注"><span class="toc-text">注</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#自定义属性明细"><span class="toc-text">自定义属性明细 </span></a></li></ol></li></ol></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <h2 id="Android-自定义View"><a href="#Android-自定义View" class="headerlink" title="Android 自定义View"></a>Android 自定义View</h2><p>梳理一下自定义控件的基本流程和知识</p>
+<h3 id="自定义View"><a href="#自定义View" class="headerlink" title="自定义View"></a>自定义View</h3><h4 id="实现View"><a href="#实现View" class="headerlink" title="实现View"></a>实现View</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SimpleTextView</span> <span class="keyword">extends</span> <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SimpleTextView</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context, attrs);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="自定义属性"><a href="#自定义属性" class="headerlink" title="自定义属性"></a>自定义属性</h4><h5 id="1、定义自定义属性"><a href="#1、定义自定义属性" class="headerlink" title="1、定义自定义属性"></a>1、定义自定义属性</h5><p>在<code>res/values</code>文件夹下创建<code>attrs.xml</code>文件，在文件中使用<code>&lt;declare-styleable&gt;</code>声明自定义属性。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;resources&gt;</span><br><span class="line">    &lt;declare-styleable name=<span class="string">"SimpleTextView"</span>&gt;</span><br><span class="line">        &lt;attr name=<span class="string">"backgroundColor"</span> format=<span class="string">"reference|color"</span> /&gt;</span><br><span class="line">        &lt;attr name=<span class="string">"text"</span> format=<span class="string">"string"</span> /&gt;</span><br><span class="line">        &lt;attr name=<span class="string">"textSize"</span> format=<span class="string">"dimension"</span> /&gt;</span><br><span class="line">    &lt;/declare-styleable&gt;</span><br><span class="line">&lt;/resources&gt;</span><br></pre></td></tr></table></figure>
+<p>代码中<code>&lt;declare-styleable&gt;</code>对 <code>SimpleTextView</code> 的类声明属性。<code>&lt;attr name=&quot;text&quot; format=&quot;string&quot; /&gt;</code> 用来声明具体属性的名称和类型，如这里声明了string类型的<code>text</code>属性。支持声明的属性类型参考<a href="#fotter1">注</a>。</p>
+<h5 id="2、使用自定义属性"><a href="#2、使用自定义属性" class="headerlink" title="2、使用自定义属性"></a>2、使用自定义属性</h5><p>在代码中使用自定义属性的过程中需要使用 <code>obtainStyledAttributes</code>处理<code>AttributeSet</code>中的属性</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">public</span> <span class="title">SimpleTextView</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context, attrs);</span><br><span class="line">     TypedArray a = context.getTheme().obtainStyledAttributes(</span><br><span class="line">                attrs,</span><br><span class="line">                R.styleable.SimpleTextView,</span><br><span class="line">                <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            text = a.getString(R.styleable.SimpleTextView_text);</span><br><span class="line">            backgroundColor = a.getColor(R.styleable.SimpleTextView_backgroundColor, <span class="number">0</span>);</span><br><span class="line">            <span class="keyword">int</span> defaultTextSize = (<span class="keyword">int</span>) TypedValue.applyDimension(</span><br><span class="line">                    TypedValue.COMPLEX_UNIT_SP, <span class="number">16</span>, getResources().getDisplayMetrics());</span><br><span class="line">            textSize = a.getDimensionPixelSize(R.styleable.SimpleTextView_textSize, defaultTextSize);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            a.recycle();</span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里需要注意的是<code>TypedArray</code> 使用完后一定要回收。如<code>typedArray.recycle();</code></p>
+<h4 id="绘制文本"><a href="#绘制文本" class="headerlink" title="绘制文本"></a>绘制文本</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initPaint</span><span class="params">()</span> </span>&#123;</span><br><span class="line">      paint = <span class="keyword">new</span> Paint();</span><br><span class="line">      paint.setTextSize(textSize);</span><br><span class="line">      rect = <span class="keyword">new</span> Rect();</span><br><span class="line">      paint.getTextBounds(text, <span class="number">0</span>, text.length(), rect);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas canvas)</span> </span>&#123;</span><br><span class="line">      paint.setColor(backgroundColor);</span><br><span class="line">      canvas.drawRect(<span class="number">0</span>, <span class="number">0</span>, getMeasuredWidth(), getMeasuredHeight(), paint);</span><br><span class="line">      paint.setColor(Color.BLACK);</span><br><span class="line">      canvas.drawText(text, getMeasuredWidth() / <span class="number">2f</span> - rect.width() / <span class="number">2f</span>, getMeasuredHeight() / <span class="number">2f</span> + rect.height() / <span class="number">2f</span>, paint);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>xml 文件中使用如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:custom</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:tools</span>=<span class="string">"http://schemas.android.com/tools"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">android:orientation</span>=<span class="string">"vertical"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">tools:context</span>=<span class="string">".MainActivity"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">com.tanjz.demo.view.SimpleTextView</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:layout_height</span>=<span class="string">"match_parent"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">custom:backgroundColor</span>=<span class="string">"@color/seafoam"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">custom:text</span>=<span class="string">"SimpleTextView"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">custom:textSize</span>=<span class="string">"15sp"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>到这里就可以看到效果了，但是当<code>android:layout_width=&quot;match_parent&quot;</code>改为<code>android:layout_width=&quot;wrap_content&quot;</code>时<code>SimpleTextView</code>的宽没有改变。这种情况需要我们对控件进行测量并设置大小。</p>
+<h4 id="测量宽高"><a href="#测量宽高" class="headerlink" title="测量宽高"></a>测量宽高</h4><p>View中有<code>onMeasure</code>,该方法是用来测量控件大小。我们可以使用该方法来实现View进行测量</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> widthMode = MeasureSpec.getMode(widthMeasureSpec);</span><br><span class="line">    <span class="keyword">int</span> widthSize = MeasureSpec.getSize(widthMeasureSpec);</span><br><span class="line">    <span class="keyword">int</span> heightMode = MeasureSpec.getMode(heightMeasureSpec);</span><br><span class="line">    <span class="keyword">int</span> heightSize = MeasureSpec.getSize(heightMeasureSpec);</span><br><span class="line">    <span class="keyword">int</span> width;</span><br><span class="line">    <span class="keyword">int</span> height;</span><br><span class="line">    <span class="keyword">if</span> (widthMode == MeasureSpec.EXACTLY) &#123;</span><br><span class="line">        width = widthSize;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">float</span> textWidth = rect.width();</span><br><span class="line">        width = (<span class="keyword">int</span>) (getPaddingLeft() + textWidth + getPaddingRight());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (heightMode == MeasureSpec.EXACTLY) &#123;</span><br><span class="line">        height = heightSize;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">float</span> textHeight = rect.height();</span><br><span class="line">        height = (<span class="keyword">int</span>) (getPaddingTop() + textHeight + getPaddingBottom());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    setMeasuredDimension(width, height);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这里我们需要了解的是<code>MeasureSpec.getMode</code>，该方法提供给我们查询测量模式的类型，每种模式对View的大小要求不同。如：</p>
+<table>
+<thead>
+<tr>
+<th>测量模式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://developer.android.com/reference/android/view/View.MeasureSpec.html#AT_MOST" target="_blank" rel="noopener">AT_MOST</a></td>
+<td>最大值模式：子布局限制在一个最大值内或为WARP_CONTENT</td>
+</tr>
+<tr>
+<td><a href="https://developer.android.com/reference/android/view/View.MeasureSpec.html#EXACTLY" target="_blank" rel="noopener">EXACTLY</a></td>
+<td>精确测量模式：明确的值或是MATCH_PARENT</td>
+</tr>
+<tr>
+<td><a href="https://developer.android.com/reference/android/view/View.MeasureSpec.html#UNSPECIFIED" target="_blank" rel="noopener">UNSPECIFIED</a></td>
+<td>无约束模式：子控件可以是任意大小</td>
+</tr>
+</tbody>
+</table>
+<p>上面代码中我们对 <code>EXACTLY</code>模式的以外的大小，通过计算的方式设置宽高。最后使用<code>setMeasuredDimension(width, height)</code>才能是宽高生效。</p>
+<p>到这里当我们将SampleTextView的宽高改为<code>wrap_content</code>时，控件此时显示正常的大小。</p>
+<h4 id="添加属性和事件"><a href="#添加属性和事件" class="headerlink" title="添加属性和事件"></a>添加属性和事件</h4><p>这里我们再实现一个点击后改变背景的效果。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">initView</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">this</span>.setOnClickListener(<span class="keyword">new</span> OnClickListener() &#123;</span><br><span class="line">           <span class="meta">@Override</span></span><br><span class="line">           <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;</span><br><span class="line">               backgroundColor = randomColor();</span><br><span class="line">               invalidate();</span><br><span class="line">               <span class="comment">//requestLayout();</span></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@ColorInt</span></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">randomColor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       Random random = <span class="keyword">new</span> Random();</span><br><span class="line">       <span class="keyword">return</span> <span class="number">0xff000000</span> | random.nextInt(<span class="number">0x00ffffff</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>这里注意的是我们需要<code>invalidate()</code>来刷新界面，它本质上是调用View的onDraw()绘制。 <code>invalidate()</code>与<code>postInvalidate()</code>区别在于<code>invalidate()</code>在主线程中调用，<code>postInvalidate()</code>在子线程中使用。</p>
+<p>到这里自定View的基本知识就有所了解，下面我们再看看与自定义ViewGroup的区别及注意实现。</p>
+<h3 id="自定义ViewGroup"><a href="#自定义ViewGroup" class="headerlink" title="自定义ViewGroup"></a>自定义ViewGroup</h3><p>ViewGroup类型控件自定义和view类型的控件基本上一样的。这里需要注意的是<code>onLayout</code>,该方法用来对子控件进行定位操作。如我们看的线性布局效果就有它实现的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomGroup</span> <span class="keyword">extends</span> <span class="title">ViewGroup</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CustomGroup</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context, attrs);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 定义子控件使用的布局参数。如 margin 属性，否则子控件没有margin属性。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> LayoutParams <span class="title">generateLayoutParams</span><span class="params">(AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MarginLayoutParams(getContext(), attrs);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onMeasure</span><span class="params">(<span class="keyword">int</span> widthMeasureSpec, <span class="keyword">int</span> heightMeasureSpec)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onMeasure(widthMeasureSpec, heightMeasureSpec);</span><br><span class="line">        <span class="keyword">int</span> childsWidth = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> childsHeight = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> childsMarginLeft = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> childsMarginTop = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> childsMarginRight = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> childsMarginBottom = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> childCount = getChildCount();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; childCount; i++) &#123;</span><br><span class="line">            View childView = getChildAt(i);</span><br><span class="line">            MarginLayoutParams lp = (MarginLayoutParams) childView.getLayoutParams();</span><br><span class="line">            measureChild(childView, widthMeasureSpec, heightMeasureSpec);</span><br><span class="line">            childsHeight += childView.getMeasuredHeight();</span><br><span class="line">            childsWidth = Math.max(childsWidth, childView.getMeasuredWidth());</span><br><span class="line">            childsMarginLeft = Math.max(<span class="number">0</span>, lp.leftMargin);</span><br><span class="line">            childsMarginTop += lp.topMargin;</span><br><span class="line">            childsMarginRight = Math.max(<span class="number">0</span>, lp.rightMargin);</span><br><span class="line">            childsMarginBottom += lp.bottomMargin;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> viewGroupWidth = getPaddingLeft() + childsWidth + getPaddingRight() + childsMarginLeft + childsMarginRight;</span><br><span class="line">        <span class="keyword">int</span> viewGroupHeight = getPaddingTop() + childsHeight + getPaddingBottom() + childsMarginTop + childsMarginBottom;</span><br><span class="line">        setMeasuredDimension(measureWidth(widthMeasureSpec, viewGroupWidth), measureHeight</span><br><span class="line">                (heightMeasureSpec, viewGroupHeight));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onLayout</span><span class="params">(<span class="keyword">boolean</span> changed, <span class="keyword">int</span> left, <span class="keyword">int</span> top, <span class="keyword">int</span> right, <span class="keyword">int</span> bottom)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (changed) &#123;</span><br><span class="line">            <span class="keyword">int</span> childCount = getChildCount();</span><br><span class="line">            <span class="keyword">int</span> mTop = getPaddingTop();</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; childCount; j++) &#123;</span><br><span class="line">                View childView = getChildAt(j);</span><br><span class="line">                MarginLayoutParams params = (MarginLayoutParams) childView.getLayoutParams();</span><br><span class="line">                <span class="keyword">int</span> mLeft = getPaddingLeft() + params.leftMargin;</span><br><span class="line">                mTop += params.topMargin;</span><br><span class="line">                childView.layout(mLeft, mTop, mLeft + childView.getMeasuredWidth(), mTop + childView.getMeasuredHeight());</span><br><span class="line">                mTop += (childView.getMeasuredHeight() + params.bottomMargin);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">measureWidth</span><span class="params">(<span class="keyword">int</span> measureSpec, <span class="keyword">int</span> viewGroupWidth)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> resultWidth = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> specMode = MeasureSpec.getMode(measureSpec);</span><br><span class="line">        <span class="keyword">int</span> specSize = MeasureSpec.getSize(measureSpec);</span><br><span class="line">        <span class="keyword">switch</span> (specMode) &#123;</span><br><span class="line">            <span class="keyword">case</span> MeasureSpec.UNSPECIFIED:</span><br><span class="line">                resultWidth = specSize;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> MeasureSpec.AT_MOST:</span><br><span class="line">                resultWidth = Math.min(viewGroupWidth, specSize);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> MeasureSpec.EXACTLY:</span><br><span class="line">                resultWidth = specSize;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> resultWidth;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">measureHeight</span><span class="params">(<span class="keyword">int</span> measureSpec, <span class="keyword">int</span> viewGroupHeight)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> resultHeight = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> specMode = MeasureSpec.getMode(measureSpec);</span><br><span class="line">        <span class="keyword">int</span> specSize = MeasureSpec.getSize(measureSpec);</span><br><span class="line">        <span class="keyword">switch</span> (specMode) &#123;</span><br><span class="line">            <span class="keyword">case</span> MeasureSpec.UNSPECIFIED:</span><br><span class="line">                resultHeight = specSize;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> MeasureSpec.AT_MOST:</span><br><span class="line">                resultHeight = Math.min(viewGroupHeight, specSize);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> MeasureSpec.EXACTLY:</span><br><span class="line">                resultHeight = specSize;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> resultHeight;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在<code>onlayout</code>中需要注意Android 的坐标体系</p>
+<p><img src="/images/android_xy.png" alt> </p>
+<h3 id="注"><a href="#注" class="headerlink" title="注"></a>注</h3><h4 id="自定义属性明细"><a href="#自定义属性明细" class="headerlink" title="自定义属性明细 "></a><span id="footer1">自定义属性明细 </span></h4><p><strong>1、布尔型  boolean </strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"showText"</span> <span class="attr">format</span>=<span class="string">"boolean"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app:showText = "true"</span><br></pre></td></tr></table></figure>
+<p><strong>2、尺寸值 dimension</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span> = <span class="string">"pie_width"</span> <span class="attr">format</span> = <span class="string">"dimension"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app:pie_width = "42dp"</span><br></pre></td></tr></table></figure>
+<p><strong>3、浮点值 float</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span> = <span class="string">"alpha"</span> <span class="attr">format</span> = <span class="string">"float"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app:alpha = "1.0"</span><br></pre></td></tr></table></figure>
+<p><strong>4、整型值 integer</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">declare-styleable</span> <span class="attr">name</span> = <span class="string">"AnimatedRotateDrawable"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span> = <span class="string">"visible"</span> /&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span> = <span class="string">"frameDuration"</span> <span class="attr">format</span>=<span class="string">"integer"</span> /&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span> = <span class="string">"framesCount"</span> <span class="attr">format</span>=<span class="string">"integer"</span> /&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span> = <span class="string">"pivotX"</span> /&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span> = <span class="string">"pivotY"</span> /&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span> = <span class="string">"drawable"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">declare-styleable</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">animated-rotate</span></span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:android</span> =<span class="string">"http://schemas.android.com/apk/res/android"</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">android:drawable</span> = <span class="string">"@drawable/图片ID"</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">android:pivotX</span> = <span class="string">"50%"</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">android:pivotY</span> = <span class="string">"50%"</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">android:framesCount</span> = <span class="string">"12"</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">android:frameDuration</span> = <span class="string">"100"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>5、字符串 string</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span> = <span class="string">"pieName"</span> <span class="attr">format</span> = <span class="string">"string"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:pieName ="this is a new pie"</span><br></pre></td></tr></table></figure>
+<p><strong>6、百分数 fraction</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span> = <span class="string">"pivotX"</span> <span class="attr">format</span> = <span class="string">"fraction"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:pivotX = "200%"</span><br></pre></td></tr></table></figure>
+<p><strong>7、枚举值 enum</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"orientation"</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">enum</span> <span class="attr">name</span>=<span class="string">"horizontal"</span> <span class="attr">value</span>=<span class="string">"0"</span> /&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">enum</span> <span class="attr">name</span>=<span class="string">"vertical"</span> <span class="attr">value</span>=<span class="string">"1"</span> /&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">attr</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:orientation = "vertical"</span><br></pre></td></tr></table></figure>
+<p><strong>8、位或运算 flag</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span>=<span class="string">"windowSoftInputMode"</span>&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">flag</span> <span class="attr">name</span> = <span class="string">"stateUnspecified"</span> <span class="attr">value</span> = <span class="string">"0"</span> /&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">flag</span> <span class="attr">name</span> = <span class="string">"stateUnchanged"</span> <span class="attr">value</span> = <span class="string">"1"</span> /&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">flag</span> <span class="attr">name</span> = <span class="string">"stateHidden"</span> <span class="attr">value</span> = <span class="string">"2"</span> /&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">flag</span> <span class="attr">name</span> = <span class="string">"stateAlwaysHidden"</span> <span class="attr">value</span> = <span class="string">"3"</span> /&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">flag</span> <span class="attr">name</span> = <span class="string">"stateVisible"</span> <span class="attr">value</span> = <span class="string">"4"</span> /&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">flag</span> <span class="attr">name</span> = <span class="string">"stateAlwaysVisible"</span> <span class="attr">value</span> = <span class="string">"5"</span> /&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">flag</span> <span class="attr">name</span> = <span class="string">"adjustUnspecified"</span> <span class="attr">value</span> = <span class="string">"0x00"</span> /&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">flag</span> <span class="attr">name</span> = <span class="string">"adjustResize"</span> <span class="attr">value</span> = <span class="string">"0x10"</span> /&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">flag</span> <span class="attr">name</span> = <span class="string">"adjustPan"</span> <span class="attr">value</span> = <span class="string">"0x20"</span> /&gt;</span> </span><br><span class="line">    <span class="tag">&lt;<span class="name">flag</span> <span class="attr">name</span> = <span class="string">"adjustNothing"</span> <span class="attr">value</span> = <span class="string">"0x30"</span> /&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">attr</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:windowSoftInputMode = "stateUnspecified | stateUnchanged　|　stateHidden"</span><br></pre></td></tr></table></figure>
+<p><strong>9、引用资源ID  reference</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span> = <span class="string">"background"</span> <span class="attr">format</span> = <span class="string">"reference"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:background = "@drawable/图片ID"</span><br></pre></td></tr></table></figure>
+<p><strong>10、颜色值 color</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span> = <span class="string">"textColor"</span> <span class="attr">format</span> = <span class="string">"color"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:textColor = "#00FF00"</span><br></pre></td></tr></table></figure>
+<p><strong>11、复合属性</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">attr</span> <span class="attr">name</span> = <span class="string">"background"</span> <span class="attr">format</span> = <span class="string">"reference|color"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">android:background = "@drawable/图片ID"</span><br><span class="line">android:textColor = "#00FF00"</span><br></pre></td></tr></table></figure>
+<hr>
+<p>参考：</p>
+<p>[1]、<a href="https://developer.android.com/reference/android/view/View.MeasureSpec" target="_blank" rel="noopener">Android MeasureSpec</a></p>
+<p>[2]、<a href="https://blog.csdn.net/lmj623565791/article/details/24252901/" target="_blank" rel="noopener">Android 自定义View </a></p>
+<p>[3]、<a href="https://jsonchao.github.io/2018/10/28/Android%20View%E7%9A%84%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B/" target="_blank" rel="noopener">Android View的绘制流程</a></p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Android/">Android</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/09/25/Android TheadLoacl/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Android TheadLocal</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/09/25/Android手机搭建Linux环境/">
+        <span class="next-text nav-default">Android手机搭建Linux环境</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:tan2junze@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/tanjunze" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">tanjunze</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
+</html>

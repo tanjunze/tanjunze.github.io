@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="Android broadcast">
+
+
+
+
+  <meta name="keywords" content="Android, Tanjunze笔记">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tanjunze笔记">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2">
+
+
+
+<link rel="canonical" href="https://tanjunze.github.io/2016/10/10/Android 广播/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null},"toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title> Android broadcast - Tanjunze笔记 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Tanjunze笔记</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Tanjunze笔记</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Android broadcast
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2016-10-09
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/Android/">Android</a>
+            
+          </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Android-Broadcast"><span class="toc-text">Android Broadcast</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#注册广播"><span class="toc-text">注册广播</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、静态注册"><span class="toc-text">1、静态注册</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、动态注册"><span class="toc-text">2、动态注册</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#发送广播"><span class="toc-text">发送广播</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、普通广播"><span class="toc-text">1、普通广播</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、有序广播"><span class="toc-text">2、有序广播</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、本地广播"><span class="toc-text">3、本地广播</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、系统广播"><span class="toc-text">4、系统广播</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、粘粘广播"><span class="toc-text">5、粘粘广播</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#广播的权限管理"><span class="toc-text">广播的权限管理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、应用内的广播通信"><span class="toc-text">1、应用内的广播通信</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、指定应用间的广播通信"><span class="toc-text">2、指定应用间的广播通信</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#广播扩展知识"><span class="toc-text">广播扩展知识</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、比较静态注册和动态注册"><span class="toc-text">1、比较静态注册和动态注册</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、广播的注意事项"><span class="toc-text">2、广播的注意事项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、广播的通信原理"><span class="toc-text">3、广播的通信原理</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <h1 id="Android-Broadcast"><a href="#Android-Broadcast" class="headerlink" title="Android Broadcast"></a>Android Broadcast</h1><p>Broadcast是一个全局的监听器，主要用于监听/ 接收应用发出的<em>广播</em>消息。广播采用<code>订阅-发布</code>设计模式（<code>观察者设计模式</code>），故广播有2个组成重要部分：<code>sendBroadcast</code>和<code>broadcastReceiver</code>。</p>
+<h3 id="注册广播"><a href="#注册广播" class="headerlink" title="注册广播"></a>注册广播</h3><h4 id="1、静态注册"><a href="#1、静态注册" class="headerlink" title="1、静态注册"></a>1、静态注册</h4><p>注册：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">receiver</span> <span class="attr">android:name</span>=<span class="string">".MyBroadcastReceiver"</span>  <span class="attr">android:exported</span>=<span class="string">"true"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.BOOT_COMPLETED"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.INPUT_METHOD_CHANGED"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">receiver</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyBroadcastReceiver</span> <span class="keyword">extends</span> <span class="title">BroadcastReceiver</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"MyBroadcastReceiver"</span>;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span> </span>&#123;</span><br><span class="line">            StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">            sb.append(<span class="string">"Action: "</span> + intent.getAction() + <span class="string">"\n"</span>);</span><br><span class="line">            sb.append(<span class="string">"URI: "</span> + intent.toUri(Intent.URI_INTENT_SCHEME).toString() + <span class="string">"\n"</span>);</span><br><span class="line">            String log = sb.toString();</span><br><span class="line">            Log.d(TAG, log);</span><br><span class="line">            Toast.makeText(context, log, Toast.LENGTH_LONG).show();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>系统在安装应用程序时注册接收器。如果应用程序当前未运行，系统可以启动应用程序并发送广播。</p>
+<h4 id="2、动态注册"><a href="#2、动态注册" class="headerlink" title="2、动态注册"></a>2、动态注册</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BroadcastReceiver br = <span class="keyword">new</span> MyBroadcastReceiver();</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">IntentFilter filter = <span class="keyword">new</span> IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);</span><br><span class="line">filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);</span><br><span class="line"><span class="keyword">this</span>.registerReceiver(br, filter);</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unregisterReceiver(br)</span><br></pre></td></tr></table></figure>
+<h3 id="发送广播"><a href="#发送广播" class="headerlink" title="发送广播"></a>发送广播</h3><h4 id="1、普通广播"><a href="#1、普通广播" class="headerlink" title="1、普通广播"></a>1、普通广播</h4><p><code>sendBroadcast</code>：已未定义的顺序向所有接收器发送广播</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = new Intent();</span><br><span class="line">intent.setAction(&quot;com.example.broadcast.MY_NOTIFICATION&quot;);</span><br><span class="line">intent.putExtra(&quot;data&quot;,&quot;Notice me senpai!&quot;);</span><br><span class="line">sendBroadcast(intent);</span><br></pre></td></tr></table></figure>
+<h4 id="2、有序广播"><a href="#2、有序广播" class="headerlink" title="2、有序广播"></a>2、有序广播</h4><p><code>sendOrderedBroadcast(Intent, String)</code>一次向一个接收器发送广播。当每个接收器依次执行时，它可以将结果传播到下一个接收器，或者它可以完全中止广播，以便它不会传递给其他接收器。通过<code>intent-filter</code>的<code>android:priority</code>属性来设置广播的优先级; 具有相同优先级的接收器将以任意顺序运行。</p>
+<p>应用示例：短信广播</p>
+<h4 id="3、本地广播"><a href="#3、本地广播" class="headerlink" title="3、本地广播"></a>3、本地广播</h4><p>即在本应用（同一进程）内发送广播。注意，本地广播只能通过<strong>动态注册</strong>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LocalBroadcastManager.sendBroadcast(Intent)</span><br></pre></td></tr></table></figure>
+<h4 id="4、系统广播"><a href="#4、系统广播" class="headerlink" title="4、系统广播"></a>4、系统广播</h4><p>系统广播 是有 系统 发送的一种形式的广播，<strong>开发者无法使用</strong>只能接受系统广播。</p>
+<h4 id="5、粘粘广播"><a href="#5、粘粘广播" class="headerlink" title="5、粘粘广播"></a>5、粘粘广播</h4><p><code>Sticky Broadcast</code> 高版本API上以废弃，不建议使用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sendStickyBroadcast(intent);</span><br></pre></td></tr></table></figure>
+<h3 id="广播的权限管理"><a href="#广播的权限管理" class="headerlink" title="广播的权限管理"></a>广播的权限管理</h3><p>在默认的情况下Android 的广播是可以<code>IPC</code>通信（含应用间通信），这种情况下其他app（非目标app）可以接受到你的广播信息从而<strong>产生安全隐患</strong>也会<strong>造成一定的性能开销</strong>。</p>
+<h4 id="1、应用内的广播通信"><a href="#1、应用内的广播通信" class="headerlink" title="1、应用内的广播通信"></a>1、应用内的广播通信</h4><p>应用内的广播 不想 被其他app 知晓时。可以考虑使用<code>LocalBroadcast</code>,</p>
+<h4 id="2、指定应用间的广播通信"><a href="#2、指定应用间的广播通信" class="headerlink" title="2、指定应用间的广播通信"></a>2、指定应用间的广播通信</h4><p><1>、 不接收其他app 的广播 </1></p>
+<p>静态注册的情况下，设置：`android:exported=”false”</p>
+<p><2>、 发送给指定的app 的广播</2></p>
+<p>在发送广播时在Intent 中指定报名<code>Intent.setPackage(packageName)</code></p>
+<p><3>、接收指定app 的广播</3></p>
+<p>在接收指定广播时时可以设置接收广播的权限，如：</p>
+<p>1、自定义权限：<a href="https://developer.android.com/guide/topics/manifest/permission-element.html" target="_blank" rel="noopener">https://developer.android.com/guide/topics/manifest/permission-element.html</a></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">permission</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:name</span>=<span class="string">"com.hello.permission.broadcast"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:label</span>=<span class="string">"@string/app_name"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:permissionGroup</span>=<span class="string">"@string/hello_world"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">android:protectionLevel</span>=<span class="string">"normal"</span> &gt;</span></span><br></pre></td></tr></table></figure>
+<p>2、接收端使用自定义权限：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">uses-permission</span> <span class="attr">android:name</span>=<span class="string">"com.hello.permission.broadcast"</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>3、发送带权限的广播</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sendBroadcast(<span class="keyword">new</span> Intent(<span class="string">"com.example.NOTIFY"</span>),</span><br><span class="line">              <span class="string">"com.hello.permission.broadcast"</span>);</span><br></pre></td></tr></table></figure>
+<p>4、接收带权限的广播</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">receiver</span> <span class="attr">android:name</span>=<span class="string">".MyBroadcastReceiver"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">android:permission</span>=<span class="string">"com.hello.permission.broadcast"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">"android.intent.action.AIRPLANE_MODE"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">receiver</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>或</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">IntentFilter filter = <span class="keyword">new</span> IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED);</span><br><span class="line">registerReceiver(receiver, filter, <span class="string">"com.hello.permission.broadcast"</span>, <span class="keyword">null</span> );</span><br></pre></td></tr></table></figure>
+<p>此时广播接收器<strong>只能接收相同权限的广播  </strong>。</p>
+<h3 id="广播扩展知识"><a href="#广播扩展知识" class="headerlink" title="广播扩展知识"></a>广播扩展知识</h3><h4 id="1、比较静态注册和动态注册"><a href="#1、比较静态注册和动态注册" class="headerlink" title="1、比较静态注册和动态注册"></a>1、比较静态注册和动态注册</h4><table>
+<thead>
+<tr>
+<th></th>
+<th>静态注册</th>
+<th>动态注册</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>注册方式</td>
+<td>AndroidManifest.xml</td>
+<td>代码中注册</td>
+</tr>
+<tr>
+<td>生命周期</td>
+<td>不受任何组件的生命周期影响，即使app关闭也可以唤醒接收</td>
+<td>跟随组件的生命周期变化而变化，需要动态注销</td>
+</tr>
+<tr>
+<td>应用场景</td>
+<td>需要实时监听广播，如系统广播</td>
+<td>需要动态监听广播，如监听文件下载的变化等</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2、广播的注意事项"><a href="#2、广播的注意事项" class="headerlink" title="2、广播的注意事项"></a>2、广播的注意事项</h4><p>广播接收者中不能进行耗时操作，否者会出现AN异常。如果需要执行耗时操作需要在线程中执行。例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyBroadcastReceiver</span> <span class="keyword">extends</span> <span class="title">BroadcastReceiver</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TAG = <span class="string">"MyBroadcastReceiver"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> PendingResult pendingResult = goAsync();</span><br><span class="line">        Task asyncTask = <span class="keyword">new</span> Task(pendingResult, intent);</span><br><span class="line">        asyncTask.execute();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Task</span> <span class="keyword">extends</span> <span class="title">AsyncTask</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> PendingResult pendingResult;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">final</span> Intent intent;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="title">Task</span><span class="params">(PendingResult pendingResult, Intent intent)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.pendingResult = pendingResult;</span><br><span class="line">            <span class="keyword">this</span>.intent = intent;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> String <span class="title">doInBackground</span><span class="params">(String... strings)</span> </span>&#123;</span><br><span class="line">            StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">            sb.append(<span class="string">"Action: "</span> + intent.getAction() + <span class="string">"\n"</span>);</span><br><span class="line">            sb.append(<span class="string">"URI: "</span> + intent.toUri(Intent.URI_INTENT_SCHEME).toString() + <span class="string">"\n"</span>);</span><br><span class="line">            String log = sb.toString();</span><br><span class="line">            Log.d(TAG, log);</span><br><span class="line">            <span class="keyword">return</span> log;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPostExecute</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">super</span>.onPostExecute(s);</span><br><span class="line">            <span class="comment">// Must call finish() so the BroadcastReceiver can be recycled.</span></span><br><span class="line">            pendingResult.finish();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3、广播的通信原理"><a href="#3、广播的通信原理" class="headerlink" title="3、广播的通信原理"></a>3、广播的通信原理</h4><p>广播中通信与<code>Servce</code>中的通信原理都是使用<code>IBinder机制</code>实现的。这里不在过度展开，会另起篇章来深度讨论<code>IBinder机制</code></p>
+<p>参考：</p>
+<p>[1]、<a href="https://developer.android.com/guide/components/broadcasts" target="_blank" rel="noopener">Android Broadcasts</a></p>
+<p>[2]、<a href="https://developer.android.com/guide/topics/manifest/permission-element.html" target="_blank" rel="noopener">Android Permission</a></p>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Android/">Android</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2017/03/22/react native整理/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">React Native 整理</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2016/09/03/Android Activity/">
+        <span class="next-text nav-default">Android Activity</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:tan2junze@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/tanjunze" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">tanjunze</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
+</html>

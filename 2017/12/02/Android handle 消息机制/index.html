@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-  <head>
+  <head><meta name="generator" content="Hexo 3.8.0">
     
-<meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
 
-<meta name="theme-color" content="#f8f5ec" />
+<meta name="theme-color" content="#f8f5ec">
 <meta name="msapplication-navbutton-color" content="#f8f5ec">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
 
-  <meta name="description" content="Android Handle 消息机制"/>
+  <meta name="description" content="Android Handle 消息机制">
 
 
 
 
-  <meta name="keywords" content="Android, Tanjunze笔记" />
+  <meta name="keywords" content="Android, Tanjunze笔记">
 
 
 
@@ -38,24 +38,24 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2">
 
 
 
-<link rel="canonical" href="https://tanjunze.github.io/2017/12/02/Android handle 消息机制/"/>
+<link rel="canonical" href="https://tanjunze.github.io/2017/12/02/Android handle 消息机制/">
 
 
 
-  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
 
 
 
 
-  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css" />
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
 
 
 
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2" />
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2">
 
 
 
@@ -230,7 +230,7 @@
   <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Android-Handle-消息机制"><span class="toc-text">Android Handle 消息机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Handle"><span class="toc-text">Handle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MessageQueue"><span class="toc-text">MessageQueue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Loop"><span class="toc-text">Loop</span></a></li></ol></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Android-Handle-消息机制"><span class="toc-text">Android Handle 消息机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Handle"><span class="toc-text">Handle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MessageQueue"><span class="toc-text">MessageQueue</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Loop"><span class="toc-text">Loop</span></a></li></ol></li></ol>
     </div>
   </div>
 
@@ -239,7 +239,7 @@
     <div class="post-content">
       
         <h1 id="Android-Handle-消息机制"><a href="#Android-Handle-消息机制" class="headerlink" title="Android Handle 消息机制"></a>Android Handle 消息机制</h1><p>handle 消息机制是Android 重要的组成部分，首先我们需要的理解的是Android为什么需要 handle 机制。开发Android的都得知道 Android有主线程之分（UI 线程），主线程中每16ms接收到Android系统的同步信号来更新UI 视图。如果在主线程中进行耗时操作会阻塞线性会造成ANR（无响应异常）。如果在子线程中进行耗时操作，当子线程任务完成时，无法直接调用主线程中UI 组件（主线程不是线程安全的，子线直接调用主线程中的UI 组件会产生不可预期的错误，如死锁等，如果给主线程加锁会造成UI 组件的复杂性并且阻塞了部分操作的执行）。基于以上的理由Android 设计了Handle 机制来确保当子线程执行完耗时操作时能够安全的更新主线程中的UI 视图（也可以确保不同线程之间的安全通信）。到这里我们能够理解 handle 机制 机制存在的理由了，下面我们继续组成、使用及原理。</p>
-<p><img src="/images/handle_loop.png" alt=""></p>
+<p><img src="/images/handle_loop.png" alt></p>
 <p>如上图，Handle 中有三个重要的组成部分：handle，Loop，MessageQueue。</p>
 <h3 id="Handle"><a href="#Handle" class="headerlink" title="Handle"></a>Handle</h3><p>在Handle主要承担着发送<code>Message</code> 到 <code>MessageQueue</code>队列中和和接收处理 <code>Loop</code> 分发过来的 <code>Message</code>。</p>
 <p>如下代码</p>

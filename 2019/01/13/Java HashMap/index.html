@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="Java HashMap">
+
+
+
+
+  <meta name="keywords" content="java, Tanjunze笔记">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Tanjunze笔记">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2">
+
+
+
+<link rel="canonical" href="https://tanjunze.github.io/2019/01/13/Java HashMap/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+  window.config = {"leancloud":{"app_id":null,"app_key":null},"toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title> Java HashMap - Tanjunze笔记 </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Tanjunze笔记</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Tanjunze笔记</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Java HashMap
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-01-12
+        </span>
+        
+          <span class="post-category">
+            
+              <a href="/categories/java/">java</a>
+            
+          </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#HashMap"><span class="toc-text">HashMap</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#HashMap-1"><span class="toc-text">HashMap</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#HashMap数据结构"><span class="toc-text">HashMap数据结构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#HashMap的存储"><span class="toc-text">HashMap的存储</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <h4 id="HashMap"><a href="#HashMap" class="headerlink" title="HashMap"></a>HashMap</h4><h5 id="HashMap-1"><a href="#HashMap-1" class="headerlink" title="HashMap"></a>HashMap</h5><p>HashMap基于哈希表的 Map 接口的实现。此实现提供所有可选的映射操作，并<strong>允许使用 null 值和 null 键</strong>。（除了<strong>不同步</strong>和允许使用 null 之外，HashMap 类与 Hashtable 大致相同。）此类<strong>不保证映射的顺序</strong>，特别是它<strong>不保证该顺序恒久不变</strong>。<br>值得注意的是HashMap不是线程安全的，如果想要线程安全的HashMap，可以通过Collections类的静态方法synchronizedMap获得线程安全的HashMap</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Map map = Collections.synchronizedMap(<span class="keyword">new</span> HashMap());</span><br></pre></td></tr></table></figure>
+<h5 id="HashMap数据结构"><a href="#HashMap数据结构" class="headerlink" title="HashMap数据结构"></a>HashMap数据结构</h5><p>HashMap的底层主要基于<strong>数组</strong>和<strong>链表</strong>实现的，它之所以查询速度相当快主要因为它通过计算散列码来决定存储的位置。HashMap主要通过key的hashcode来计算hash值，只有hashcode相同，计算出来的hash值就一样，就会出现hash冲突。HashMap底层是通过链表来解决hash冲突的。</p>
+<p><img src="/images/hashmap.png" alt></p>
+<p>HashMap中有<strong>数组</strong>和<strong>链表</strong>(1.8之后根据阈值使用红黑数)来实现存储：</p>
+<p><strong>数组：</strong></p>
+<p>数组存储区间是连续的，占用内存严重，故空间复杂度大。但数组的二分查找时间复杂度小，为O(1)； 数组特点：寻址容易，插入和删除困难；</p>
+<p><strong>链表</strong></p>
+<p>链表存储区间离散，占用内存比较宽松，故空间复杂度很小，但时间复杂度很大，达O（N）。链表特点：寻址困难，插入和删除容易。</p>
+<p><strong>哈希表</strong></p>
+<p>综合两者的特性，做出一种寻址容易，插入删除也容易的数据结构，这就是<strong>哈希表</strong>。 <strong>哈希表有多种不同的实现方法</strong>，HashMap则使用的是<strong>拉链法</strong>，也叫作<strong>【链地址法】</strong>；</p>
+<h5 id="HashMap的存储"><a href="#HashMap的存储" class="headerlink" title="HashMap的存储"></a>HashMap的存储</h5><p>HashMap中有两个很重要的参数，容量(Capacity)和负载因子(Load factor)</p>
+<ul>
+<li>size</li>
+</ul>
+<p>size表示HashMap中存放KV的数量（为链表和树中的KV的总和）</p>
+<ul>
+<li><p>Capacity</p>
+<p>capacity就是指HashMap中桶(数组)的数量。默认值为16。一般第一次扩容时会扩容到64。<strong>容量都是2的幂</strong>。</p>
+</li>
+<li><p>loadFactor</p>
+</li>
+<li><p>装载因子。装载因子用来衡量HashMap满的程度。loadFactor的默认值为0.75f。计算HashMap的实时装载因子的方法为：size/capacity，而不是占用桶的数量去除以capacity。</p>
+</li>
+</ul>
+<p><strong>put函数的实现</strong></p>
+<ol>
+<li>对key的hashCode()做hash，再计算（index = (array.length - 1) &amp; hash]）当前key需要存储数组的位置;（不顺序的原因）</li>
+<li>如果没碰撞，直接放到数组中；</li>
+<li>如果碰撞了，当前数组位置的链表中；</li>
+<li>如果碰撞导致链表过长(大于等于TREEIFY_THRESHOLD)，就把链表转换成红黑树；</li>
+<li>如果节点已经存在就替换old value(保证key的唯一性)</li>
+<li>如果数组满了(超过load factor*current capacity)，就要resize。</li>
+</ol>
+<p><strong>get函数的实现</strong></p>
+<ol>
+<li>bucket（数组）里的第一个节点，直接命中；</li>
+<li>如果有冲突，则通过key.equals(k)去查找对应的entry<br>若为树，则在树中通过key.equals(k)查找，O(logn)；<br>若为链表，则在链表中通过key.equals(k)查找，O(n)。</li>
+</ol>
+<hr>
+<p>参考：</p>
+<ol>
+<li><a href="https://blog.csdn.net/jianyuerensheng/article/details/51579091" target="_blank" rel="noopener">数据结构】HashMap原理及实现学习总结</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/38615394" target="_blank" rel="noopener">HashMap结构详解</a></li>
+<li><a href="https://blog.csdn.net/CSDN_Terence/article/details/77711687" target="_blank" rel="noopener">HashMap设计原理、HashMap的数据结构、HashMap源码实现</a></li>
+<li><a href="https://yikun.github.io/2015/04/01/Java-HashMap%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/" target="_blank" rel="noopener">Java HashMap工作原理及实现</a></li>
+<li><a href="https://blog.csdn.net/fan2012huan/article/details/51087722" target="_blank" rel="noopener">HashMap中capacity、loadFactor、threshold、size等概念的解释</a></li>
+<li><a href="https://crossoverjie.top/2018/07/23/java-senior/ConcurrentHashMap/" target="_blank" rel="noopener">HashMap? ConcurrentHashMap? 相信看完这篇没人能难住你！</a></li>
+</ol>
+
+      
+    </div>
+
+    
+      
+      
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/java/">java</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/01/17/Java JVM/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Java JVM</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2018/12/30/Java数据结构/">
+        <span class="next-text nav-default">Java数据结构</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:tan2junze@gmail.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/tanjunze" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2017 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">tanjunze</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
+</html>
